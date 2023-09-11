@@ -5,7 +5,7 @@ import Signup from "../pages/Signup";
 import ForgotPassword from "../pages/ForgotPassword";
 import ResetPassword from "../pages/ResetPassword";
 
-import PablicLayout from "../components/layouts/PablicLayout";
+import PublicLayout from "../components/layouts/PublicLayout";
 
 import { createBrowserRouter } from "react-router-dom";
 
@@ -14,50 +14,50 @@ export const router = createBrowserRouter([
     path: "/",
     id: "Home",
     element: (
-      <PablicLayout>
+      <PublicLayout>
         <Home />
-      </PablicLayout>
+      </PublicLayout>
     ),
     errorElement: (
-      <PablicLayout>
+      <PublicLayout>
         <ErrorPage />
-      </PablicLayout>
+      </PublicLayout>
     ),
   },
   {
     path: "/login",
     id: "Login",
     element: (
-      <PablicLayout>
+      <PublicLayout>
         <Login />
-      </PablicLayout>
+      </PublicLayout>
     ),
   },
   {
     path: "/signup",
     id: "Signup",
     element: (
-      <PablicLayout>
+      <PublicLayout>
         <Signup />
-      </PablicLayout>
+      </PublicLayout>
     ),
   },
   {
     path: "/forgot-password",
     id: "Forgot Password",
     element: (
-      <PablicLayout>
+      <PublicLayout>
         <ForgotPassword />
-      </PablicLayout>
+      </PublicLayout>
     ),
   },
   {
     path: "/reset-password",
     id: "Reset Password",
     element: (
-      <PablicLayout>
+      <PublicLayout>
         <ResetPassword />
-      </PablicLayout>
+      </PublicLayout>
     ),
   },
 ]);

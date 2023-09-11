@@ -4,7 +4,7 @@ type Props = {
   children: JSX.Element;
 };
 
-const PablicLayout = ({ children }: Props) => {
+const PublicLayout = ({ children }: Props) => {
   return (
     <Box
       display="flex"
@@ -16,4 +16,4 @@ const PablicLayout = ({ children }: Props) => {
     </Box>
   );
 };
-export default PablicLayout;
+export default PublicLayout;
