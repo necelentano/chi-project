@@ -1,10 +1,7 @@
+import { PropsWithChildren } from "react";
 import Box from "@mui/material/Box";
 
-type Props = {
-  children: JSX.Element;
-};
-
-const PublicLayout = ({ children }: Props) => {
+const PublicLayout = ({ children }: PropsWithChildren) => {
   return (
     <Box
       display="flex"
