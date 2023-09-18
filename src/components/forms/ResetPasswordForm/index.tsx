@@ -12,26 +12,23 @@ import FormButton from "../common/FormButton";
 import FormFooter from "../common/FormFooter";
 import FormTitle from "../common/FormTitle";
 import ErrorText from "../common/ErrorText";
-import signupSchema from "../schemas/signupSchema";
+import resetPasswordSchema from "../schemas/resetPasswordSchema";
 
-export type SignupFormValues = {
-  email: string;
-  firstName: string;
-  lastName: string;
+export type ResetPasswordFormValues = {
   password: string;
   confirmPassword: string;
 };
 
-function SignupForm() {
+const ResetPasswordForm = () => {
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<SignupFormValues>({
-    resolver: yupResolver(signupSchema),
+  } = useForm<ResetPasswordFormValues>({
+    resolver: yupResolver(resetPasswordSchema),
   });
 
-  const onSubmit = (data: SignupFormValues) => {
+  const onSubmit = (data: ResetPasswordFormValues) => {
     console.log(data);
   };
 
@@ -57,8 +54,8 @@ function SignupForm() {
           textAlign: "center",
         }}
       >
-        <FormTitle title="Sign Up" />
-        <FormDescription description="Create a new account" />
+        <FormTitle title="Reset Password" />
+        <FormDescription description="Enter new password" />
       </Box>
 
       <Box
@@ -68,43 +65,9 @@ function SignupForm() {
         noValidate
       >
         <Box sx={{ position: "relative" }}>
-          <FormLabel text="Email" />
+          <FormLabel text="New Password" />
           <FormInput
-            placeholder="Email address"
-            id="email"
-            type="email"
-            register={register("email")}
-          />
-          {errors.email ? <ErrorText>{errors.email.message}</ErrorText> : null}
-        </Box>
-        <Box sx={{ position: "relative" }}>
-          <FormLabel text="First Name" />
-          <FormInput
-            placeholder="Your first name"
-            id="firstName"
-            type="text"
-            register={register("firstName")}
-          />
-          {errors.firstName ? (
-            <ErrorText>{errors.firstName.message}</ErrorText>
-          ) : null}
-        </Box>
-        <Box sx={{ position: "relative" }}>
-          <FormLabel text="Last Name" />
-          <FormInput
-            placeholder="Your last name"
-            id="lastName"
-            type="text"
-            register={register("lastName")}
-          />
-          {errors.lastName ? (
-            <ErrorText>{errors.lastName.message}</ErrorText>
-          ) : null}
-        </Box>
-        <Box sx={{ position: "relative" }}>
-          <FormLabel text="Password" />
-          <FormInput
-            placeholder="Password"
+            placeholder="Your new password"
             id="password"
             type="password"
             register={register("password")}
@@ -115,9 +78,9 @@ function SignupForm() {
           ) : null}
         </Box>
         <Box sx={{ position: "relative" }}>
-          <FormLabel text="Confirm Password" />
+          <FormLabel text="Confirm New Password" />
           <FormInput
-            placeholder="Confirm password"
+            placeholder="Confirm new password"
             id="confirmPassword"
             type="password"
             register={register("confirmPassword")}
@@ -127,12 +90,13 @@ function SignupForm() {
             <ErrorText>{errors.confirmPassword.message}</ErrorText>
           ) : null}
         </Box>
-        <FormButton btnType="contained">Register</FormButton>
+        <FormButton btnType="contained">Send</FormButton>
       </Box>
+
       <FormFooter
-        text="Already have an account?"
-        linkText="Log in"
-        to="/login"
+        text="Don't have an account?"
+        linkText="Sign up"
+        to="/signup"
       />
       <FormFooter
         text="Forgot password?"
@@ -141,6 +105,6 @@ function SignupForm() {
       />
     </Paper>
   );
-}
+};
 
-export default SignupForm;
+export default ResetPasswordForm;
