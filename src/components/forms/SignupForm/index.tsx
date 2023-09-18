@@ -130,6 +130,11 @@ function SignupForm() {
         <FormButton btnType="contained">Register</FormButton>
       </Box>
       <FormFooter
+        text="Already have an account?"
+        linkText="Log in"
+        to="/login"
+      />
+      <FormFooter
         text="Forgot password?"
         linkText="Enter your email"
         to="/forgot-password"
