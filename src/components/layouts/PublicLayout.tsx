@@ -8,6 +8,7 @@ const PublicLayout = ({ children }: PropsWithChildren) => {
       justifyContent="center"
       alignItems="center"
       height="100vh"
+      bgcolor="bgDark.main"
     >
       {children}
     </Box>
