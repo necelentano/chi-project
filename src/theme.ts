@@ -18,6 +18,17 @@ const theme = createTheme({
     fontWeightMedium: 600,
     fontWeightBold: 700,
   },
+  components: {
+    MuiInputBase: {
+      styleOverrides: {
+        input: {
+          "&:-webkit-autofill": {
+            transition: "background-color 5000s ease-in-out 0s",
+          },
+        },
+      },
+    },
+  },
 });
 
 export default responsiveFontSizes(theme);
