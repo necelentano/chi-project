@@ -7,7 +7,7 @@ const PublicLayout = ({ children }: PropsWithChildren) => {
       display="flex"
       justifyContent="center"
       alignItems="center"
-      height="100vh"
+      minHeight="100dvh"
       bgcolor="bgDark.main"
     >
       {children}
