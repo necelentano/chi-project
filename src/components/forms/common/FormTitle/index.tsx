@@ -11,7 +11,7 @@ const FormTitle = ({ title }: TFormTitleProps) => {
         fontSize: "24px",
         fontWeight: "fontWeightBold",
         color: "#252733",
-        mt: "32px",
+        mt: "26px",
       }}
     >
       {title}

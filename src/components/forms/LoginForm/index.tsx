@@ -1,5 +1,7 @@
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { toast } from "react-toastify";
 
 import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
@@ -12,14 +14,27 @@ import FormButton from "../common/FormButton";
 import FormFooter from "../common/FormFooter";
 import FormTitle from "../common/FormTitle";
 import ErrorText from "../common/ErrorText";
+import FormInputWrapper from "../common/FormInputWrapper";
 import loginSchema from "../schemas/loginSchema";
+import { useLogInMutation } from "../../../store/firebaseApi";
+import { useNavigate } from "react-router-dom";
+import { useAppSelector } from "../../../utils/hooks/redux";
+import { TStoreUser } from "../../../utils/types";
+import { TAuthError } from "../../../utils/types";
 
 export type LoginFormValues = {
   email: string;
   password: string;
 };
 
-function LoginForm() {
+const LoginForm = () => {
+  const navigate = useNavigate();
+  const user = useAppSelector<TStoreUser>((state) => state.auth.user);
+  const [
+    login,
+    { isLoading, isError: isLoginError, error: loginError, isSuccess },
+  ] = useLogInMutation();
+
   const {
     register,
     handleSubmit,
@@ -29,8 +44,29 @@ function LoginForm() {
   });
 
   const onSubmit = (data: LoginFormValues) => {
-    console.log(data);
+    login(data);
   };
+
+  useEffect(() => {
+    if (user) {
+      navigate("/dashboard");
+    }
+  }, [user, navigate]);
+
+  useEffect(() => {
+    if (isSuccess) {
+      toast.success(`Welcome back, ${user?.name}!`);
+      navigate("/dashboard");
+    }
+  }, [isSuccess, navigate, user]);
+
+  useEffect(() => {
+    if (isLoginError) {
+      toast.error(
+        `${(loginError as TAuthError).name}: ${(loginError as TAuthError).code}`
+      );
+    }
+  }, [isLoginError, loginError]);
 
   return (
     <Paper
@@ -48,7 +84,6 @@ function LoginForm() {
       <FormHeader />
       <Box
         sx={{
-          mb: "20px",
           display: "flex",
           flexDirection: "column",
           textAlign: "center",
@@ -64,17 +99,19 @@ function LoginForm() {
         onSubmit={handleSubmit(onSubmit)}
         noValidate
       >
-        <Box sx={{ position: "relative" }}>
+        <FormInputWrapper>
           <FormLabel text="Email" />
           <FormInput
             placeholder="Email address"
             id="email"
             type="email"
             register={register("email")}
+            error={errors.email ? true : false}
           />
           {errors.email ? <ErrorText>{errors.email.message}</ErrorText> : null}
-        </Box>
-        <Box sx={{ position: "relative" }}>
+        </FormInputWrapper>
+
+        <FormInputWrapper>
           <FormLabel text="Password" />
           <FormInput
             placeholder="Password"
@@ -82,12 +119,30 @@ function LoginForm() {
             type="password"
             register={register("password")}
             isPassword
+            error={errors.password ? true : false}
           />
           {errors.password ? (
             <ErrorText>{errors.password.message}</ErrorText>
           ) : null}
+        </FormInputWrapper>
+
+        <FormButton btnType="contained" loading={isLoading}>
+          Log in
+        </FormButton>
+
+        <Box
+          sx={{
+            position: "relative",
+            display: "flex",
+            justifyContent: "center",
+          }}
+        >
+          {isLoginError ? (
+            <ErrorText>{`${(loginError as TAuthError).name}: ${
+              (loginError as TAuthError).code
+            }`}</ErrorText>
+          ) : null}
         </Box>
-        <FormButton btnType="contained">Log in</FormButton>
       </Box>
 
       <FormFooter
@@ -102,6 +157,6 @@ function LoginForm() {
       />
     </Paper>
   );
-}
+};
 
 export default LoginForm;

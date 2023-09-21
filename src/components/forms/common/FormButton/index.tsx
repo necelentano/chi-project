@@ -3,11 +3,13 @@ import { PropsWithChildren } from "react";
 
 type FormButtonProps = {
   btnType: "text" | "contained";
+  loading?: boolean;
 };
 
 const FormButton = ({
   children,
   btnType,
+  loading,
 }: PropsWithChildren<FormButtonProps>) => {
   return (
     <Button
@@ -21,6 +23,8 @@ const FormButton = ({
             color: "#FFFFFF",
             textTransform: "capitalize",
             py: "10px",
+            mt: "30px",
+            mb: "20px",
           },
         },
         {
@@ -33,7 +37,7 @@ const FormButton = ({
         },
       ]}
     >
-      {children}
+      {loading ? "Loading..." : children}
     </Button>
   );
 };

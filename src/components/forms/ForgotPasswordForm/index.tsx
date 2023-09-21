@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { toast } from "react-toastify";
 
 import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
@@ -12,15 +13,32 @@ import FormLabel from "../common/FormLabel";
 import FormButton from "../common/FormButton";
 import FormFooter from "../common/FormFooter";
 import FormTitle from "../common/FormTitle";
+import FormInputWrapper from "../common/FormInputWrapper";
 import ErrorText from "../common/ErrorText";
 import forgotPasswordSchema from "../schemas/forgotPasswordSchema";
+import { useForgotPasswordMutation } from "../../../store/firebaseApi";
+import { Link, useNavigate } from "react-router-dom";
+import { useAppSelector } from "../../../utils/hooks/redux";
+import { TAuthError } from "../../../utils/types";
 
 export type ForgotPasswordFormValues = {
   email: string;
 };
 
 const ForgotPasswordForm = () => {
+  const navigate = useNavigate();
+  const user = useAppSelector((state) => state.auth.user);
   const [emailIsSent, setEmailIsSent] = useState<boolean>(false);
+
+  const [
+    forgotPassword,
+    {
+      isLoading,
+      isError: isForgotPassError,
+      error: forgotPassError,
+      isSuccess,
+    },
+  ] = useForgotPasswordMutation();
 
   const {
     register,
@@ -30,13 +48,41 @@ const ForgotPasswordForm = () => {
     resolver: yupResolver(forgotPasswordSchema),
   });
 
-  const onSubmit = (data: ForgotPasswordFormValues) => {
-    console.log(data);
+  const onSubmit = ({ email }: ForgotPasswordFormValues) => {
+    forgotPassword(email);
     setEmailIsSent(true);
   };
 
   const sentDescription =
     "Link to change your password has been sent to provided email if we have it inside our system";
+
+  useEffect(() => {
+    if (user) {
+      navigate("/dashboard");
+    }
+  }, [user, navigate]);
+
+  useEffect(() => {
+    if (isSuccess) {
+      toast.info(`Email was sent. Please check your inbox`);
+    }
+  }, [isSuccess]);
+
+  useEffect(() => {
+    if (isForgotPassError) {
+      toast.error(
+        `${(forgotPassError as TAuthError).name}: ${
+          (forgotPassError as TAuthError).code
+        }`
+      );
+    }
+  }, [isForgotPassError, forgotPassError]);
+
+  const contentAfterEmailSent = (
+    <Link to="/login">
+      <FormButton btnType="text">Go to Login Page</FormButton>
+    </Link>
+  );
 
   return (
     <Paper
@@ -70,7 +116,7 @@ const ForgotPasswordForm = () => {
         />
       </Box>
 
-      {!emailIsSent && (
+      {!emailIsSent ? (
         <>
           <Box
             sx={{ width: "100%", mb: "32px" }}
@@ -78,19 +124,35 @@ const ForgotPasswordForm = () => {
             onSubmit={handleSubmit(onSubmit)}
             noValidate
           >
-            <Box sx={{ position: "relative" }}>
+            <FormInputWrapper>
               <FormLabel text="Email" />
               <FormInput
-                placeholder="Email address"
+                placeholder="Your valid email address"
                 id="email"
                 type="email"
                 register={register("email")}
+                error={errors.email ? true : false}
               />
               {errors.email ? (
                 <ErrorText>{errors.email.message}</ErrorText>
               ) : null}
+            </FormInputWrapper>
+            <FormButton btnType="contained" loading={isLoading}>
+              Send
+            </FormButton>
+            <Box
+              sx={{
+                position: "relative",
+                display: "flex",
+                justifyContent: "center",
+              }}
+            >
+              {forgotPassError ? (
+                <ErrorText>{`${(forgotPassError as TAuthError).name}: ${
+                  (forgotPassError as TAuthError).code
+                }`}</ErrorText>
+              ) : null}
             </Box>
-            <FormButton btnType="contained">Send</FormButton>
           </Box>
 
           <FormFooter
@@ -99,6 +161,8 @@ const ForgotPasswordForm = () => {
             to="/signup"
           />
         </>
+      ) : (
+        contentAfterEmailSent
       )}
     </Paper>
   );
