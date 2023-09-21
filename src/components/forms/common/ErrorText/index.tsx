@@ -8,8 +8,8 @@ const ErrorText = ({ children }: PropsWithChildren) => {
       sx={{
         fontSize: "14px",
         color: "red",
+        mt: "4px",
         position: "absolute",
-        top: "72px",
       }}
     >
       {children}
