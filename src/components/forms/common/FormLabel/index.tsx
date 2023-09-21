@@ -12,6 +12,7 @@ const FormLabel = ({ text }: FormLabelProps) => {
         fontWeight: "fontWeightBold",
         fontSize: "16px",
         color: "#9FA2B4",
+        mt: "30px",
         "&.MuiFormLabel-root": {
           color: "#9FA2B4",
         },
