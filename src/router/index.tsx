@@ -62,15 +62,6 @@ export const router = createBrowserRouter([
     ),
   },
   {
-    path: "/reset-password",
-    id: "Reset Password",
-    element: (
-      <PublicLayout>
-        <ResetPassword />
-      </PublicLayout>
-    ),
-  },
-  {
     path: "/dashboard",
     id: "Dashboard",
     element: (
@@ -120,6 +111,11 @@ export const router = createBrowserRouter([
             path: "/dashboard/subscription",
             id: "Dashboard Subscription",
             element: <Subscription />,
+          },
+          {
+            path: "/dashboard/settings/reset-password",
+            id: "Settings Reset Password",
+            element: <ResetPassword />,
           },
         ],
       },
