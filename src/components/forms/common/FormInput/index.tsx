@@ -11,6 +11,7 @@ type TFormInputProps = {
   register: UseFormRegisterReturn;
   id: string;
   type: string;
+  error: boolean;
 };
 
 const FormInput = ({
@@ -19,6 +20,7 @@ const FormInput = ({
   register,
   id,
   type,
+  error,
 }: TFormInputProps) => {
   const [inputType, setInputType] = useState(isPassword ? "password" : type);
 
@@ -43,18 +45,26 @@ const FormInput = ({
     <InputBase
       sx={{
         "&.MuiInputBase-root": {
-          mb: "30px",
           borderRadius: "8px",
           backgroundColor: "#FCFDFE",
-          border: "1px solid",
+          border: "2px solid",
           borderColor: "#F0F1F7",
           py: "8px",
           pl: "16px",
           fontSize: "14px",
+          "&.Mui-focused": {
+            border: "2px solid",
+            borderColor: "grey",
+          },
+          "&.Mui-error": {
+            border: "2px solid",
+            borderColor: "red",
+          },
         },
       }}
       placeholder={placeholder}
       type={inputType}
+      error={error}
       required
       fullWidth
       endAdornment={isPassword ? icon : null}
