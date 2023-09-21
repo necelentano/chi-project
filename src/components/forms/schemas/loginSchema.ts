@@ -8,7 +8,7 @@ const loginSchema = yup.object().shape({
   password: yup
     .string()
     .required("Password is required")
-    .min(5, "Password should have a minimum length of 5")
+    .min(6, "Password should have a minimum length of 6")
     .max(15, "Password should have a maximum length of 15"),
 });
 
