@@ -74,7 +74,8 @@ export const router = createBrowserRouter([
         errorElement: <ErrorPage />,
         children: [
           {
-            index: true,
+            path: "/dashboard/overview",
+            id: "Dashboard Overview",
             element: <Overview />,
           },
           {

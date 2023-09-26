@@ -56,7 +56,7 @@ const SignupForm = () => {
   useEffect(() => {
     if (user) {
       toast.info(`Welcome to Dashboard Kit!`);
-      navigate("/dashboard");
+      navigate("/dashboard/overview");
     }
   }, [user, navigate]);
 

@@ -11,7 +11,6 @@ import FormInput from "../common/FormInput";
 import FormLabel from "../common/FormLabel";
 import FormButton from "../common/FormButton";
 import FormInputWrapper from "../common/FormInputWrapper";
-import FormTitle from "../common/FormTitle";
 import ErrorText from "../common/ErrorText";
 import resetPasswordSchema from "../schemas/resetPasswordSchema";
 import { useResetPasswordMutation } from "../../../store/firebaseApi";
@@ -76,16 +75,6 @@ const ResetPasswordForm = () => {
         borderRadius: "8px",
       }}
     >
-      <Box
-        sx={{
-          mb: "20px",
-          display: "flex",
-          flexDirection: "column",
-          textAlign: "center",
-        }}
-      >
-        <FormTitle title="Reset Password" />
-      </Box>
       <Box
         sx={{ width: "100%", mb: "32px" }}
         component="form"

@@ -49,14 +49,14 @@ const LoginForm = () => {
 
   useEffect(() => {
     if (user) {
-      navigate("/dashboard");
+      navigate("/dashboard/overview");
     }
   }, [user, navigate]);
 
   useEffect(() => {
     if (isSuccess) {
       toast.success(`Welcome back, ${user?.name}!`);
-      navigate("/dashboard");
+      navigate("/dashboard/overview");
     }
   }, [isSuccess, navigate, user]);
 
