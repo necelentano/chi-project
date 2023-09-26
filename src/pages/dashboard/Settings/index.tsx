@@ -1,15 +1,17 @@
-import { PropsWithChildren } from "react";
-import { Link } from "react-router-dom";
+import Box from "@mui/material/Box";
 
-const Settings = ({ children }: PropsWithChildren) => {
+import SettingsOptionItem from "../../../components/SettingsOptionItem";
+
+const Settings = () => {
   return (
-    <div>
-      <div>Settings Page</div>
-      <div>
-        <Link to="reset-password">Reset Password on Settings Page</Link>
-      </div>
-      {children}
-    </div>
+    <Box sx={{ py: "20px" }}>
+      <SettingsOptionItem
+        title="Reset Password"
+        desc="This option allows you to change your password"
+        buttonText="Reset Password"
+        route="reset-password"
+      />
+    </Box>
   );
 };
 
