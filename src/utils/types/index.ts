@@ -9,3 +9,16 @@ export type TAuthError = {
   readonly customData: object;
   readonly name: string;
 };
+
+export type TTaskItem = {
+  id: number;
+  taskText: string;
+  completed: boolean;
+  priority: "default" | "new" | "urgent";
+};
+
+export type TTicketItem = {
+  ticketTypeId: number;
+  ticketTypeName: string;
+  ticketQuantity: number;
+};
