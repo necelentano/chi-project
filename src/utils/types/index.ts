@@ -22,3 +22,23 @@ export type TTicketItem = {
   ticketTypeName: string;
   ticketQuantity: number;
 };
+
+export enum TicketPriorityEnum {
+  low,
+  normal,
+  high,
+}
+
+export type TTicketDatagridItem = {
+  id: number;
+  createdAt: Date;
+  updatedAt: Date;
+  details: string;
+  priority: TicketPriorityEnum;
+  byUser: {
+    id: number;
+    createdAt: Date;
+    name: string;
+    photo: string;
+  };
+};
