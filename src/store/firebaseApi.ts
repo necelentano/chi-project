@@ -19,11 +19,7 @@ export const firebaseApi = createApi({
       queryFn: async ({ firstName, lastName, email, password }) => {
         try {
           const auth = getAuth();
-          const result = await createUserWithEmailAndPassword(
-            auth,
-            email,
-            password
-          );
+          await createUserWithEmailAndPassword(auth, email, password);
 
           await updateProfile(auth.currentUser as User, {
             displayName: `${firstName} ${lastName}`,
@@ -31,8 +27,7 @@ export const firebaseApi = createApi({
               "https://vectorified.com/images/default-avatar-icon-36.png",
           });
 
-          console.log("sigUp result", result);
-          return { data: { message: "You are registered successfully!" } };
+          return { data: "Sign up OK" };
         } catch (e) {
           return { error: e };
         }
@@ -42,13 +37,9 @@ export const firebaseApi = createApi({
       queryFn: async ({ email, password }) => {
         try {
           const auth = getAuth();
-          const result = await signInWithEmailAndPassword(
-            auth,
-            email,
-            password
-          );
-          console.log("firebaseApi login result", result);
-          return { data: "OK" };
+          await signInWithEmailAndPassword(auth, email, password);
+
+          return { data: "Log in OK" };
         } catch (e) {
           return { error: e };
         }
@@ -58,9 +49,9 @@ export const firebaseApi = createApi({
       queryFn: async () => {
         try {
           const auth = getAuth();
-          const result = await signOut(auth);
-          console.log("logOut result", result);
-          return { data: "logOut ok" };
+          await signOut(auth);
+
+          return { data: "Log out OK" };
         } catch (e) {
           return { error: e };
         }
@@ -80,21 +71,21 @@ export const firebaseApi = createApi({
 
           await reauthenticateWithCredential(user, credential);
 
-          const result = await updatePassword(user, password);
-          console.log("resetPassword result", result);
-          return { data: "Reset password action success" };
+          await updatePassword(user, password);
+
+          return { data: "Reset password OK" };
         } catch (e) {
           return { error: e };
         }
       },
     }),
     forgotPassword: build.mutation({
-      queryFn: async (email) => {
+      queryFn: async ({ email }) => {
         try {
           const auth = getAuth();
-          const result = await sendPasswordResetEmail(auth, email);
-          console.log("forgotPassword result", result);
-          return { data: "Forgot password action success" };
+          await sendPasswordResetEmail(auth, email);
+
+          return { data: "Forgot password OK" };
         } catch (e) {
           return { error: e };
         }

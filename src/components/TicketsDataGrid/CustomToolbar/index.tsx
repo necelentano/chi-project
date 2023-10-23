@@ -22,9 +22,11 @@ import AddIcon from "@mui/icons-material/Add";
 import FilterIcon from "../../../assets/filterIcon.svg?react";
 import SortIcon from "../../../assets/sortIcon.svg?react";
 import DashModal from "../../DashModal";
-import AddTicketForm from "../../forms/AddTicketForm";
 
 import { setModalOpen } from "../../../store/modalSlice";
+import DynamicForm from "../../forms/DynamicForm";
+import { addTicketFormData } from "../../forms/formsData/addTicket";
+import { TAuthError } from "../../../utils/types";
 
 type TCustomToolbarProps = {
   sortModel: GridSortModel;
@@ -210,7 +212,13 @@ const CustomToolbar = ({
             transform: "translate(-50%, -50%)",
           }}
         >
-          <AddTicketForm />
+          <DynamicForm
+            template={addTicketFormData}
+            submitHandler={() => console.log("POST to Firebase")}
+            isError={false}
+            error={{} as TAuthError}
+            isLoading={false}
+          />
         </Box>
       </DashModal>
     </GridToolbarContainer>

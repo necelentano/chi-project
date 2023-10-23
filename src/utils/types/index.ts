@@ -42,3 +42,28 @@ export type TTicketDatagridItem = {
     photo: string;
   };
 };
+
+export enum InputTypeEnum {
+  Text = "text",
+  Select = "select",
+  DateTimePicker = "dateTimePicker",
+  ImageUpload = "imageUpload",
+}
+
+export type TSelectOptions = { value: "low" | "normal" | "high"; text: string };
+
+export type TField = {
+  name: string;
+  placeholder: string;
+  label: string;
+  isPassword: boolean;
+  inputType: string;
+  textFieldType: string;
+  options: TSelectOptions[] | undefined;
+};
+
+export type TFooterItem = {
+  text: string;
+  linkText: string;
+  to: string;
+};
