@@ -1,76 +1,115 @@
 import { useState } from "react";
-import { UseFormRegisterReturn } from "react-hook-form";
+import { UseFormReturn, useController } from "react-hook-form";
 
-import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
-
-import InputBase from "@mui/material/InputBase";
+import OutlinedInput from "@mui/material/OutlinedInput";
+import { IconButton, InputAdornment } from "@mui/material";
+import { Visibility, VisibilityOff } from "@mui/icons-material";
+import ErrorText from "../ErrorText";
 
 type TFormInputProps = {
   placeholder: string;
-  isPassword?: boolean;
-  register: UseFormRegisterReturn;
-  id: string;
+  isPassword: boolean;
+  control: UseFormReturn["control"];
+  name: string;
   type: string;
-  error: boolean;
+  id: string;
 };
 
 const FormInput = ({
   placeholder,
   isPassword,
-  register,
-  id,
+  control,
+  name,
   type,
-  error,
+  id,
 }: TFormInputProps) => {
-  const [inputType, setInputType] = useState(isPassword ? "password" : type);
+  const [textOrPassword, setTextOrPassword] = useState(
+    isPassword ? "password" : type
+  );
 
   const handleIconClick = () => {
-    return inputType === "password"
-      ? setInputType("text")
-      : setInputType("password");
+    return textOrPassword === "password"
+      ? setTextOrPassword("text")
+      : setTextOrPassword("password");
   };
 
-  const icon = (
-    <VisibilityOffIcon
-      sx={{
-        color: "#9FA2B4",
-        width: "20px",
-        height: "20px",
-        mr: "16px",
-      }}
-      onClick={handleIconClick}
-    />
-  );
+  const [showPassword, setShowPassword] = useState(false);
+
+  const handleClickShowPassword = () => {
+    handleIconClick();
+    setShowPassword((show) => !show);
+  };
+
+  const handleMouseDownPassword = (
+    event: React.MouseEvent<HTMLButtonElement>
+  ) => {
+    event.preventDefault();
+  };
+
+  const {
+    field,
+    fieldState: { error },
+  } = useController({ control, name });
+  const [value, setValue] = useState("");
+
   return (
-    <InputBase
-      sx={{
-        "&.MuiInputBase-root": {
-          borderRadius: "8px",
-          backgroundColor: "#FCFDFE",
-          border: "2px solid",
-          borderColor: "#F0F1F7",
-          py: "8px",
-          pl: "16px",
-          fontSize: "14px",
-          "&.Mui-focused": {
-            border: "2px solid",
-            borderColor: "grey",
+    <>
+      <OutlinedInput
+        placeholder={placeholder}
+        type={textOrPassword}
+        error={!!error}
+        required
+        fullWidth
+        id={id}
+        endAdornment={
+          isPassword ? (
+            <InputAdornment position="end">
+              <IconButton
+                aria-label="toggle password visibility"
+                onClick={handleClickShowPassword}
+                onMouseDown={handleMouseDownPassword}
+                edge="end"
+                sx={{
+                  color: "#9FA2B4",
+                  mr: "2px",
+                }}
+              >
+                {showPassword ? <VisibilityOff /> : <Visibility />}
+              </IconButton>
+            </InputAdornment>
+          ) : null
+        }
+        value={value}
+        onChange={(e) => {
+          setValue(e.target.value);
+          field.onChange(e.target.value);
+        }}
+        sx={{
+          "&.MuiOutlinedInput-root": {
+            backgroundColor: "#FCFDFE",
+            fontSize: "14px",
           },
-          "&.Mui-error": {
+          "& .MuiOutlinedInput-input": {
+            py: "14px",
+          },
+          "& .MuiOutlinedInput-notchedOutline": {
             border: "2px solid",
+            borderColor: "#F0F1F7",
+            borderRadius: "8px",
+          },
+          "&:hover .MuiOutlinedInput-notchedOutline": {
+            borderColor: "#F0F1F7",
+          },
+          "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
+            borderColor: "#212121",
+          },
+          "&.Mui-error .MuiOutlinedInput-notchedOutline": {
             borderColor: "red",
           },
-        },
-      }}
-      placeholder={placeholder}
-      type={inputType}
-      error={error}
-      required
-      fullWidth
-      endAdornment={isPassword ? icon : null}
-      id={id}
-      {...register}
-    />
+        }}
+      />
+      {error ? <ErrorText>{error.message}</ErrorText> : null}
+    </>
   );
 };
 
