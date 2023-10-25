@@ -22,13 +22,15 @@ import { TLoginFormData } from "../formsData/login";
 import { TAddTicketFormData } from "../formsData/addTicket";
 import { TForgotPasswordFormData } from "../formsData/forgotPassword";
 
+export type TFormTemplate =
+  | TLoginFormData
+  | TAddContactFormData
+  | TResetPasswordFormData
+  | TAddTicketFormData
+  | TForgotPasswordFormData;
+
 type TDynamicFormProps = {
-  template:
-    | TLoginFormData
-    | TAddContactFormData
-    | TResetPasswordFormData
-    | TAddTicketFormData
-    | TForgotPasswordFormData;
+  template: TFormTemplate;
   submitHandler: MutationTrigger<
     MutationDefinition<
       FieldValues,

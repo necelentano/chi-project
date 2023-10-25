@@ -24,22 +24,51 @@ import SortIcon from "../../../assets/sortIcon.svg?react";
 import DashModal from "../../DashModal";
 
 import { setModalOpen } from "../../../store/modalSlice";
-import DynamicForm from "../../forms/DynamicForm";
-import { addTicketFormData } from "../../forms/formsData/addTicket";
+import DynamicForm, { TFormTemplate } from "../../forms/DynamicForm";
+
 import { TAuthError } from "../../../utils/types";
+import { MutationTrigger } from "@reduxjs/toolkit/dist/query/react/buildHooks";
+import { BaseQueryFn, MutationDefinition } from "@reduxjs/toolkit/dist/query";
+import { FieldValues } from "react-hook-form";
 
 type TCustomToolbarProps = {
   sortModel: GridSortModel;
   setSortModel: Dispatch<SetStateAction<GridSortModel>>;
   setFilterButtonEl: Ref<HTMLButtonElement>;
+  sortOptionFields: {
+    value: string;
+    text: string;
+  }[];
+  formTemplate: TFormTemplate;
+  formSubmitHandler: MutationTrigger<
+    MutationDefinition<
+      FieldValues,
+      BaseQueryFn,
+      never,
+      string | undefined,
+      "api"
+    >
+  >;
+  formIsError: boolean;
+  formError: TAuthError;
+  formIsLoading: boolean;
+  formButtonText: string;
 };
 
 const CustomToolbar = ({
   sortModel,
   setSortModel,
   setFilterButtonEl,
+  sortOptionFields,
+  formTemplate,
+  formSubmitHandler,
+  formIsError,
+  formError,
+  formIsLoading,
+  formButtonText,
 }: TCustomToolbarProps) => {
   const dispatch = useAppDispatch();
+
   const { open } = useAppSelector((state) => state.modal);
   const [anchorElMenu, setAnchorElMenu] = useState<null | HTMLButtonElement>(
     null
@@ -137,18 +166,19 @@ const CustomToolbar = ({
                     Choose column
                   </InputLabel>
                   <Select
-                    labelId="demo-simple-select-standard-label"
-                    id="demo-simple-select-standard"
+                    labelId="select-label"
+                    id="select"
                     value={field}
                     onChange={handleChange}
                   >
                     <MenuItem value="">
                       <em>None</em>
                     </MenuItem>
-                    <MenuItem value="ticketDetails">ticketDetails</MenuItem>
-                    <MenuItem value="customerName">customerName</MenuItem>
-                    <MenuItem value="date">date</MenuItem>
-                    <MenuItem value="priority">priority</MenuItem>
+                    {sortOptionFields?.map((item) => (
+                      <MenuItem key={item.value} value={item.value}>
+                        {item.text}
+                      </MenuItem>
+                    ))}
                   </Select>
                 </FormControl>
               </MenuItem>
@@ -196,7 +226,7 @@ const CustomToolbar = ({
               },
             }}
           >
-            Add ticket
+            {formButtonText}
           </Button>
         </Box>
       </Box>
@@ -213,11 +243,11 @@ const CustomToolbar = ({
           }}
         >
           <DynamicForm
-            template={addTicketFormData}
-            submitHandler={() => console.log("POST to Firebase")}
-            isError={false}
-            error={{} as TAuthError}
-            isLoading={false}
+            template={formTemplate}
+            submitHandler={formSubmitHandler}
+            isError={formIsError}
+            error={formError}
+            isLoading={formIsLoading}
           />
         </Box>
       </DashModal>
