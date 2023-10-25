@@ -67,3 +67,8 @@ export type TFooterItem = {
   linkText: string;
   to: string;
 };
+
+export type TSortModel = {
+  field: string;
+  sort: "asc" | "desc";
+};
