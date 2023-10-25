@@ -1,3 +1,4 @@
+import { GridColDef } from "@mui/x-data-grid";
 import { TicketPriorityEnum } from "../types";
 import dayjs from "dayjs";
 import customParseFormat from "dayjs/plugin/customParseFormat";
@@ -17,4 +18,11 @@ export const sortContactsByDate = (a: TDate, b: TDate) => {
   const bTimestamp = dayjs(b, "MMMM D, YYYY");
 
   return aTimestamp.valueOf() - bTimestamp.valueOf();
+};
+
+export const extractOptionFields = (columns: GridColDef[]) => {
+  return columns.map((column) => ({
+    value: column.field,
+    text: column.headerName,
+  }));
 };
