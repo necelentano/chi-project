@@ -3,27 +3,10 @@ import DynamicForm from "../../components/forms/DynamicForm";
 import { loginFormData } from "../../components/forms/formsData/login";
 import { useLogInMutation } from "../../store/firebaseApi";
 import { toast } from "react-toastify";
-import { useNavigate } from "react-router-dom";
-import { useAppSelector } from "../../utils/hooks/redux";
-import { TAuthError, TStoreUser } from "../../utils/types";
+import { TAuthError } from "../../utils/types";
 
 function Login() {
-  const navigate = useNavigate();
-  const user = useAppSelector<TStoreUser>((state) => state.auth.user);
-  const [login, { isLoading, isError, error, isSuccess }] = useLogInMutation();
-
-  useEffect(() => {
-    if (user) {
-      navigate("/dashboard/overview");
-    }
-  }, [user, navigate]);
-
-  useEffect(() => {
-    if (isSuccess) {
-      toast.success(`Welcome back, ${user?.name}!`);
-      navigate("/dashboard/overview");
-    }
-  }, [isSuccess, navigate, user]);
+  const [login, { isLoading, isError, error }] = useLogInMutation();
 
   useEffect(() => {
     if (isError) {

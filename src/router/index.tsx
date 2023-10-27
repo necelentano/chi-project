@@ -1,25 +1,31 @@
-import ErrorPage from "../pages/ErrorPage";
-import Home from "../pages/Home";
-import Login from "../pages/Login";
-import Signup from "../pages/Signup";
-import ForgotPassword from "../pages/ForgorPassword";
-import ResetPassword from "../pages/ResetPassword";
-import Dashboard from "../pages/dashboard/DashboardRoot";
-import Overview from "../pages/dashboard/Overview";
-import Tickets from "../pages/dashboard/Tickets";
-import Ideas from "../pages/dashboard/Ideas";
-import Contacts from "../pages/dashboard/Contacts";
-import Agents from "../pages/dashboard/Agents";
-import Articles from "../pages/dashboard/Articles";
-import Settings from "../pages/dashboard/Settings";
-import Subscription from "../pages/dashboard/Subscription";
+/* eslint-disable react-refresh/only-export-components */
+import React from "react";
 
-import PublicLayout from "../components/layouts/PublicLayout";
-import Protected from "../components/Protected";
+const ErrorPage = React.lazy(() => import("../pages/ErrorPage"));
+const Home = React.lazy(() => import("../pages/Home"));
+const Login = React.lazy(() => import("../pages/Login"));
+const Signup = React.lazy(() => import("../pages/Signup"));
+const ForgotPassword = React.lazy(() => import("../pages/ForgorPassword"));
+const ResetPassword = React.lazy(() => import("../pages/ResetPassword"));
+const Dashboard = React.lazy(() => import("../pages/dashboard/DashboardRoot"));
+const Overview = React.lazy(() => import("../pages/dashboard/Overview"));
+const Tickets = React.lazy(() => import("../pages/dashboard/Tickets"));
+const Ideas = React.lazy(() => import("../pages/dashboard/Ideas"));
+const Contacts = React.lazy(() => import("../pages/dashboard/Contacts"));
+const Agents = React.lazy(() => import("../pages/dashboard/Agents"));
+const Articles = React.lazy(() => import("../pages/dashboard/Articles"));
+const Settings = React.lazy(() => import("../pages/dashboard/Settings"));
+const Subscription = React.lazy(
+  () => import("../pages/dashboard/Subscription")
+);
+const PublicLayout = React.lazy(
+  () => import("../components/layouts/PublicLayout")
+);
+const Protected = React.lazy(() => import("../components/Protected"));
 
 import { createBrowserRouter } from "react-router-dom";
 
-export const router = createBrowserRouter([
+const router = createBrowserRouter([
   {
     path: "/",
     id: "Home",
@@ -123,3 +129,5 @@ export const router = createBrowserRouter([
     ],
   },
 ]);
+
+export default router;
