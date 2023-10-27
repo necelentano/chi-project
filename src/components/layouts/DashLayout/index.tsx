@@ -1,10 +1,11 @@
-import { PropsWithChildren, useState } from "react";
+import { PropsWithChildren, Suspense, useState } from "react";
 
 import Box from "@mui/material/Box";
 import Hidden from "@mui/material/Hidden";
 
 import DashboardSideNav from "../../DashboardSideNav";
 import DashboardHeader from "../../DashboardHeader";
+import Loader from "../../Loader";
 
 const drawerWidth = 255;
 
@@ -48,7 +49,9 @@ const DashLayout = ({ children }: PropsWithChildren) => {
       <Box sx={{ flex: "1", display: "flex", flexDirection: "column" }}>
         <DashboardHeader onToggleSideNav={handleDrawerToggle} />
 
-        <Box sx={{ bgcolor: "#F7F8FC" }}>{children}</Box>
+        <Box sx={{ bgcolor: "#F7F8FC" }}>
+          <Suspense fallback={<Loader />}>{children}</Suspense>
+        </Box>
       </Box>
     </Box>
   );
