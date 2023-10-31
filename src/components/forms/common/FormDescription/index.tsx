@@ -1,22 +1,13 @@
 import Typography from "@mui/material/Typography";
 
+import styles from "./styles";
+
 type TFormDescriptionProps = {
   description: string;
 };
 
 const FormDescription = ({ description }: TFormDescriptionProps) => {
-  return (
-    <Typography
-      sx={{
-        fontSize: "14px",
-        fontWeight: "fontWeightRegular",
-        color: "#9FA2B4",
-        mt: "12px",
-      }}
-    >
-      {description}
-    </Typography>
-  );
+  return <Typography sx={styles.description}>{description}</Typography>;
 };
 
 export default FormDescription;

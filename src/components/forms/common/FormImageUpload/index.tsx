@@ -11,6 +11,8 @@ import {
 import { useState } from "react";
 import ErrorText from "../ErrorText";
 
+import styles from "./styles";
+
 type TFormImageUpload = {
   control: UseFormReturn["control"];
   name: string;
@@ -33,12 +35,12 @@ const FormImageUpload = ({
   const [value, setValue] = useState("");
   return (
     <>
-      <Box sx={{ display: "flex", alignItems: "center", mt: "32px" }}>
+      <Box sx={styles.wrapper}>
         <IconButton component="label">
           <AddPhotoIcon />
           <Input
             type={type}
-            sx={{ display: "none" }}
+            sx={styles.input}
             inputProps={{ accept: "image/*" }}
             value={value}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
@@ -49,17 +51,9 @@ const FormImageUpload = ({
         </IconButton>
 
         {!watch("image") || (watch("image") as FileList).length === 0 ? (
-          <Typography
-            sx={{
-              fontSize: "14px",
-              fontWeight: 600,
-              ml: "24px",
-            }}
-          >
-            {placeholder}
-          </Typography>
+          <Typography sx={styles.text}>{placeholder}</Typography>
         ) : (
-          <Typography sx={{ fontSize: "14px", fontWeight: 600, ml: "24px" }}>
+          <Typography sx={styles.text}>
             {(watch("image") as FileList)[0].name}
           </Typography>
         )}

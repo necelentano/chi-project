@@ -11,6 +11,7 @@ import { resetPasswordFormData } from "../../components/forms/formsData/resetPas
 import { useResetPasswordMutation } from "../../store/firebaseApi";
 
 import { TAuthError } from "../../utils/types";
+import styles from "./styles";
 
 const ResetPassword = () => {
   const navigate = useNavigate();
@@ -35,17 +36,8 @@ const ResetPassword = () => {
     }
   }, [isError, error]);
   return (
-    <Box
-      sx={{
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "center",
-        alignItems: "center",
-        minHeight: "100%",
-        maxWidth: "100%",
-      }}
-    >
-      <Box sx={{ mr: "auto", ml: "30px", mb: "20px" }}>
+    <Box sx={styles.container}>
+      <Box sx={styles.buttonWrapper}>
         <Button
           variant="outlined"
           startIcon={<WestIcon />}

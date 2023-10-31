@@ -10,6 +10,8 @@ import TaskItemSkeleton from "./TaskItemSkeleton";
 import AddTaskIcon from "../../../assets/addTaskIcon.svg?react";
 import mokedTasksData from "../../../data/tasks";
 
+import styles from "./styles";
+
 const addTaskSchema = yup.object().shape({
   taskText: yup
     .string()
@@ -24,12 +26,7 @@ export type TaskFormValues = {
 
 const TasksSection = () => {
   const [tasks, setTasks] = useState<TTaskItem[]>(mokedTasksData);
-  const {
-    register,
-    handleSubmit,
-    reset,
-    // formState: { errors },
-  } = useForm<TaskFormValues>({
+  const { register, handleSubmit, reset } = useForm<TaskFormValues>({
     resolver: yupResolver(addTaskSchema),
   });
 
@@ -54,22 +51,15 @@ const TasksSection = () => {
     reset();
   };
   return (
-    <Box sx={{ mt: "9px" }}>
+    <Box sx={styles.container}>
       <Box
         component="form"
-        sx={{
-          display: "flex",
-          justifyContent: "space-between",
-          pl: "32px",
-          pr: "44px",
-          borderBottom: "1px solid #DFE0EB",
-          pb: "16px",
-        }}
+        sx={styles.form}
         noValidate
         autoComplete="off"
         onSubmit={handleSubmit(onSubmit)}
       >
-        <Box sx={{ width: "100%", textOverflow: "ellipsis" }}>
+        <Box sx={styles.inputWrapper}>
           <TextField
             id="taskText"
             variant="standard"
@@ -82,32 +72,17 @@ const TasksSection = () => {
           />
         </Box>
 
-        <Box sx={{ width: "24px", height: "24px" }}>
-          <IconButton sx={{ mt: "-3px" }} type="submit">
+        <Box sx={styles.addTaskButtonWrapper}>
+          <IconButton sx={styles.iconButton} type="submit">
             <SvgIcon>
               <AddTaskIcon />
             </SvgIcon>
           </IconButton>
         </Box>
       </Box>
-      <Box
-        sx={{
-          "& .MuiBox-root:last-of-type": {
-            borderBottom: 0,
-          },
-        }}
-      >
+      <Box sx={styles.taskListWrapper}>
         {!loading ? (
-          <Box
-            sx={{
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "center",
-              alignItems: "center",
-              width: "100%",
-              minHeight: "100%",
-            }}
-          >
+          <Box sx={styles.skeletonTasksWrapper}>
             {[0, 1, 2].map((item) => (
               <TaskItemSkeleton key={item} />
             ))}

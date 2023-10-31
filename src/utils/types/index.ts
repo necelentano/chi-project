@@ -72,3 +72,9 @@ export type TSortModel = {
   field: string;
   sort: "asc" | "desc";
 };
+
+export enum TaskLabelEnum {
+  Default = "default",
+  New = "new",
+  Urgent = "urgent",
+}

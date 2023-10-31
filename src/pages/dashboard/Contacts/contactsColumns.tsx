@@ -5,6 +5,7 @@ import { GridColDef } from "@mui/x-data-grid";
 
 import ActionsCell from "../../../components/CommonDataGrid/ActionsCell";
 import { sortContactsByDate } from "../../../utils/helpers";
+import styles from "./columnsStyles";
 
 dayjs.extend(relativeTime);
 
@@ -16,19 +17,10 @@ export const contactColumns: GridColDef[] = [
     minWidth: 350,
     headerClassName: "datagrid-header-row",
     renderCell: (params) => (
-      <Box sx={{ display: "flex", alignItems: "center", ml: "32px" }}>
-        <Avatar src={params.row.photo} sx={{ mr: "32px" }} />
+      <Box sx={styles.nameContainer}>
+        <Avatar src={params.row.photo} sx={styles.avatar} />
         <Box>
-          <Typography
-            sx={{
-              color: "#252733",
-              fontSize: "14px",
-              fontWeight: 600,
-              mb: "4px",
-            }}
-          >
-            {params.row.name}
-          </Typography>
+          <Typography sx={styles.text}>{params.row.name}</Typography>
         </Box>
       </Box>
     ),
@@ -41,16 +33,7 @@ export const contactColumns: GridColDef[] = [
     minWidth: 200,
     renderCell: (params) => (
       <Box>
-        <Typography
-          sx={{
-            color: "#252733",
-            fontSize: "14px",
-            fontWeight: 600,
-            mb: "4px",
-          }}
-        >
-          {params.row.email}
-        </Typography>
+        <Typography sx={styles.text}>{params.row.email}</Typography>
       </Box>
     ),
     valueGetter: (params) => params.row.email,
@@ -61,23 +44,8 @@ export const contactColumns: GridColDef[] = [
     flex: 4,
     minWidth: 400,
     renderCell: (params) => (
-      <Box
-        sx={{
-          overflowWrap: "break-word",
-        }}
-      >
-        <Typography
-          sx={{
-            color: "#252733",
-            fontSize: "14px",
-            fontWeight: 600,
-            mb: "4px",
-
-            whiteSpace: "wrap",
-          }}
-        >
-          {params.row.address}
-        </Typography>
+      <Box sx={styles.addressContainer}>
+        <Typography sx={styles.addressText}>{params.row.address}</Typography>
       </Box>
     ),
     valueGetter: (params) => params.row.address,
@@ -90,14 +58,7 @@ export const contactColumns: GridColDef[] = [
     sortComparator: sortContactsByDate,
     renderCell: (params) => (
       <Box>
-        <Typography
-          sx={{
-            color: "#252733",
-            fontSize: "14px",
-            fontWeight: 600,
-            mb: "4px",
-          }}
-        >
+        <Typography sx={styles.text}>
           {dayjs(params.row.createdAt).format("MMMM D, YYYY")}
         </Typography>
       </Box>

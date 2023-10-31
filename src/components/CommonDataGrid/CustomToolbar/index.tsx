@@ -31,6 +31,8 @@ import { MutationTrigger } from "@reduxjs/toolkit/dist/query/react/buildHooks";
 import { BaseQueryFn, MutationDefinition } from "@reduxjs/toolkit/dist/query";
 import { FieldValues } from "react-hook-form";
 
+import styles from "./styles";
+
 type TCustomToolbarProps = {
   sortModel: GridSortModel;
   setSortModel: Dispatch<SetStateAction<GridSortModel>>;
@@ -91,10 +93,8 @@ const CustomToolbar = ({
 
   return (
     <GridToolbarContainer>
-      <Box
-        sx={{ display: "flex", justifyContent: "space-between", width: "100%" }}
-      >
-        <Box sx={{ display: "flex", ml: "32px" }}>
+      <Box sx={styles.container}>
+        <Box sx={styles.sortButtonWrapper}>
           <Box>
             <Button
               variant="text"
@@ -103,17 +103,7 @@ const CustomToolbar = ({
               onClick={(event) => {
                 setAnchorElMenu(event.currentTarget);
               }}
-              sx={{
-                mr: "32px",
-                borderRadius: "8px",
-                py: "6px",
-                "&.MuiButton-text": {
-                  color: "#4B506D",
-                  textTransform: "capitalize",
-                  fontSize: "14px",
-                  fontWeight: 600,
-                },
-              }}
+              sx={styles.sortButton}
             >
               Sort
             </Button>
@@ -129,15 +119,8 @@ const CustomToolbar = ({
               <MenuItem
                 onClick={() => setOrder("asc")}
                 sx={[
-                  {
-                    "& .MuiSvgIcon-root": {
-                      fontSize: 18,
-                      marginRight: "8px",
-                    },
-                  },
-                  sortModel[0].sort === "asc" && {
-                    bgcolor: "primaryLight.main",
-                  },
+                  styles.menuItemIcon,
+                  sortModel[0].sort === "asc" && styles.menuItemActive,
                 ]}
               >
                 <ArrowUpwardIcon />
@@ -146,22 +129,15 @@ const CustomToolbar = ({
               <MenuItem
                 onClick={() => setOrder("desc")}
                 sx={[
-                  {
-                    "& .MuiSvgIcon-root": {
-                      fontSize: 18,
-                      marginRight: "8px",
-                    },
-                  },
-                  sortModel[0].sort === "desc" && {
-                    bgcolor: "primaryLight.main",
-                  },
+                  styles.menuItemIcon,
+                  sortModel[0].sort === "desc" && styles.menuItemActive,
                 ]}
               >
                 <ArrowDownwardIcon />
                 Sort by DESC
               </MenuItem>
               <MenuItem>
-                <FormControl variant="standard" sx={{ m: 1, minWidth: 150 }}>
+                <FormControl variant="standard" sx={styles.formControl}>
                   <InputLabel id="demo-simple-select-standard-label">
                     Choose column
                   </InputLabel>
@@ -192,39 +168,18 @@ const CustomToolbar = ({
                   startIcon: <FilterIcon />,
                 },
               }}
-              sx={{
-                borderRadius: "8px",
-                py: "6px",
-                "&.MuiButton-text": {
-                  color: "#4B506D",
-                  textTransform: "capitalize",
-                  fontSize: "14px",
-                  fontWeight: 600,
-                },
-                "& .MuiDataGrid-filterForm": {
-                  flexDirection: "column",
-                  top: "20px",
-                },
-              }}
+              sx={styles.filterButton}
             />
           </Box>
         </Box>
 
-        <Box sx={{ pr: "32px", ml: "auto" }}>
+        <Box sx={styles.filterButtonWrapper}>
           <Button
             variant="text"
             size="small"
             startIcon={<AddIcon />}
             onClick={() => dispatch(setModalOpen(true))}
-            sx={{
-              borderRadius: "8px",
-              py: "6px",
-              "&.MuiButton-text": {
-                textTransform: "inherit",
-                fontSize: "14px",
-                fontWeight: 600,
-              },
-            }}
+            sx={styles.formButton}
           >
             {formButtonText}
           </Button>
@@ -234,14 +189,7 @@ const CustomToolbar = ({
         isOpen={open}
         handleClose={() => dispatch(setModalOpen(false))}
       >
-        <Box
-          sx={{
-            position: "absolute",
-            top: "50%",
-            left: "50%",
-            transform: "translate(-50%, -50%)",
-          }}
-        >
+        <Box sx={styles.modalFormContainer}>
           <DynamicForm
             template={formTemplate}
             submitHandler={formSubmitHandler}

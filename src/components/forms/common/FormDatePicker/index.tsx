@@ -10,6 +10,8 @@ import { useState } from "react";
 import { Dayjs } from "dayjs";
 import ErrorText from "../ErrorText";
 
+import styles from "./styles";
+
 type TFormDatePickerProps = {
   control: UseFormReturn["control"];
   name: string;
@@ -37,42 +39,11 @@ const FormDatePicker = ({ control, name }: TFormDatePickerProps) => {
           }}
           slotProps={{
             openPickerButton: {
-              sx: { mr: "0px" },
+              sx: styles.openPickerButton,
             },
             textField: {
               error: !!error,
-              sx: {
-                input: {
-                  "&::placeholder": {
-                    opacity: "0.42",
-                  },
-                },
-                color: "red",
-                width: "100%",
-                borderRadius: "8px",
-                backgroundColor: "#FCFDFE",
-                fontSize: "14px",
-                "& .MuiInputBase-input": {
-                  py: "15px",
-                  fontSize: "14px",
-                },
-                "& .MuiOutlinedInput-root": {
-                  "& fieldset": {
-                    border: "2px solid",
-                    borderColor: "#F0F1F7",
-                    borderRadius: "8px",
-                  },
-                  "&:hover fieldset": {
-                    borderColor: "#F0F1F7",
-                  },
-                  "&.Mui-focused fieldset": {
-                    borderColor: "#212121",
-                  },
-                  "&.Mui-error fieldset": {
-                    borderColor: "red",
-                  },
-                },
-              },
+              sx: styles.textField,
             },
           }}
         />

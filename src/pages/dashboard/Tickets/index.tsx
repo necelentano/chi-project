@@ -7,6 +7,8 @@ import { TAuthError, TSortModel } from "../../../utils/types";
 import { addTicketFormData } from "../../../components/forms/formsData/addTicket";
 import { useEffect, useState } from "react";
 
+import styles from "./styles";
+
 const Tickets = () => {
   const isMobile = useMediaQuery("(max-width:600px)");
   const isTablet = useMediaQuery("(max-width:900px)");
@@ -39,13 +41,9 @@ const Tickets = () => {
       disableGutters
       maxWidth={"xl"}
       sx={[
-        { my: "20px" },
-        isMobile && {
-          width: "375px",
-        },
-        isTablet && {
-          width: "375px",
-        },
+        styles.container,
+        isMobile && styles.mobileWidth,
+        isTablet && styles.tabletWidth,
       ]}
     >
       <CommonDataGrid

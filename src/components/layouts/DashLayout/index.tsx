@@ -7,6 +7,8 @@ import DashboardSideNav from "../../DashboardSideNav";
 import DashboardHeader from "../../DashboardHeader";
 import Loader from "../../Loader";
 
+import styles from "./styles";
+
 const drawerWidth = 255;
 
 const DashLayout = ({ children }: PropsWithChildren) => {
@@ -17,14 +19,11 @@ const DashLayout = ({ children }: PropsWithChildren) => {
   };
 
   return (
-    <Box sx={{ display: "flex", minHeight: "100vh", bgcolor: "#F7F8FC" }}>
-      <Box
-        component="nav"
-        sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
-      >
+    <Box sx={styles.container}>
+      <Box component="nav" sx={styles.navigationWrapper(drawerWidth)}>
         <Hidden smUp>
           <DashboardSideNav
-            PaperProps={{ style: { width: drawerWidth } }}
+            PaperProps={styles.sideNavPaperProps(drawerWidth)}
             variant="temporary"
             open={mobileOpen}
             onClose={handleDrawerToggle}
@@ -32,24 +31,15 @@ const DashLayout = ({ children }: PropsWithChildren) => {
           />
         </Hidden>
         <DashboardSideNav
-          PaperProps={{ style: { width: drawerWidth } }}
-          sx={{
-            display: { sm: "block", xs: "none" },
-            flexShrink: 0,
-            "& .MuiDrawer-paper": {
-              width: 255,
-              boxSizing: "border-box",
-              bgcolor: "bgDark.main",
-              color: "#DDE2FF",
-            },
-          }}
+          PaperProps={styles.sideNavPaperProps(drawerWidth)}
+          sx={styles.dashboardSideNav}
         />
       </Box>
 
-      <Box sx={{ flex: "1", display: "flex", flexDirection: "column" }}>
+      <Box sx={styles.pageContentWrapper}>
         <DashboardHeader onToggleSideNav={handleDrawerToggle} />
 
-        <Box sx={{ bgcolor: "#F7F8FC" }}>
+        <Box sx={styles.pageContent}>
           <Suspense fallback={<Loader />}>{children}</Suspense>
         </Box>
       </Box>

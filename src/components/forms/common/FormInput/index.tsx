@@ -6,6 +6,8 @@ import { IconButton, InputAdornment } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import ErrorText from "../ErrorText";
 
+import styles from "./styles";
+
 type TFormInputProps = {
   placeholder: string;
   isPassword: boolean;
@@ -69,10 +71,7 @@ const FormInput = ({
                 onClick={handleClickShowPassword}
                 onMouseDown={handleMouseDownPassword}
                 edge="end"
-                sx={{
-                  color: "#9FA2B4",
-                  mr: "2px",
-                }}
+                sx={styles.adornmentIconButton}
               >
                 {showPassword ? <VisibilityOff /> : <Visibility />}
               </IconButton>
@@ -84,29 +83,7 @@ const FormInput = ({
           setValue(e.target.value);
           field.onChange(e.target.value);
         }}
-        sx={{
-          "&.MuiOutlinedInput-root": {
-            backgroundColor: "#FCFDFE",
-            fontSize: "14px",
-          },
-          "& .MuiOutlinedInput-input": {
-            py: "14px",
-          },
-          "& .MuiOutlinedInput-notchedOutline": {
-            border: "2px solid",
-            borderColor: "#F0F1F7",
-            borderRadius: "8px",
-          },
-          "&:hover .MuiOutlinedInput-notchedOutline": {
-            borderColor: "#F0F1F7",
-          },
-          "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
-            borderColor: "#212121",
-          },
-          "&.Mui-error .MuiOutlinedInput-notchedOutline": {
-            borderColor: "red",
-          },
-        }}
+        sx={styles.input}
       />
       {error ? <ErrorText>{error.message}</ErrorText> : null}
     </>
