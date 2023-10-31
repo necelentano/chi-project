@@ -14,6 +14,8 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { navbadItemsList } from "./consts/navbarItemsList";
 import logo from "../../assets/logo.svg";
 
+import styles from "./styles";
+
 interface IUpdatedDrawerProps extends DrawerProps {
   onCloseListItem?: () => void;
 }
@@ -25,38 +27,16 @@ const DashboardSideNav = (props: IUpdatedDrawerProps) => {
   const location = useLocation();
 
   return (
-    <Drawer
-      sx={{
-        flexShrink: 0,
-        "& .MuiDrawer-paper": {
-          width: 255,
-          boxSizing: "border-box",
-          bgcolor: "bgDark.main",
-          color: "#DDE2FF",
-        },
-      }}
-      variant="permanent"
-      anchor="left"
-      {...other}
-    >
-      <Toolbar sx={{ mt: "18px" }}>
-        <Avatar
-          alt="Logo"
-          src={logo}
-          sx={{ width: 32, height: 32, mr: "12px" }}
-        />
+    <Drawer sx={styles.drawer} variant="permanent" anchor="left" {...other}>
+      <Toolbar sx={styles.toolbar}>
+        <Avatar alt="Logo" src={logo} sx={styles.avatar} />
         <Typography>Dashboard Kit</Typography>
       </Toolbar>
 
       <List>
         {navbadItemsList.map((item) => {
           if (item.label === "Divider") {
-            return (
-              <Divider
-                key={item.id}
-                sx={{ bgcolor: "#DFE0EB", my: "8px", opacity: "0.2" }}
-              />
-            );
+            return <Divider key={item.id} sx={styles.divider} />;
           }
           return (
             <ListItem
@@ -69,20 +49,9 @@ const DashboardSideNav = (props: IUpdatedDrawerProps) => {
             >
               <ListItemButton
                 selected={location.pathname.includes(item.route)}
-                sx={{
-                  "&.MuiListItemButton-root": {},
-                  "&.Mui-selected": {
-                    bgcolor: "#5f5f5f",
-                    borderLeft: "3px solid #DDE2FF",
-                    boxSizing: "border-box",
-                    paddingLeft: "13px",
-                    ":hover": {
-                      bgcolor: "#5f5f5f",
-                    },
-                  },
-                }}
+                sx={styles.listItemButton}
               >
-                <ListItemIcon sx={{ color: "#DDE2FF" }}>
+                <ListItemIcon sx={styles.listItemIcon}>
                   {item.icon}
                 </ListItemIcon>
                 <ListItemText primary={item.label} />

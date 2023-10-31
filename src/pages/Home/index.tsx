@@ -4,39 +4,16 @@ import FormTitle from "../../components/forms/common/FormTitle";
 import { Link } from "react-router-dom";
 import FormButton from "../../components/forms/common/FormButton";
 
+import styles from "./styles";
+
 function Home() {
   return (
-    <Paper
-      variant="outlined"
-      sx={{
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "center",
-        alignItems: "center",
-        width: "380px",
-        p: "32px",
-        borderRadius: "8px",
-      }}
-    >
+    <Paper variant="outlined" sx={styles.paperContainer}>
       <FormHeader />
-      <Box
-        sx={{
-          mb: "20px",
-          display: "flex",
-          flexDirection: "column",
-          textAlign: "center",
-        }}
-      >
+      <Box sx={styles.itemsContainer}>
         <FormTitle title="Home Page" />
       </Box>
-      <Box
-        sx={{
-          mb: "20px",
-          display: "flex",
-          flexDirection: "column",
-          textAlign: "center",
-        }}
-      >
+      <Box sx={styles.itemsContainer}>
         <Link to="/login">
           <FormButton btnType="contained">Go to Login Page</FormButton>
         </Link>

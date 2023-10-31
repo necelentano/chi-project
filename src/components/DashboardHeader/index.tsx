@@ -19,6 +19,8 @@ import { TStoreUser } from "../../utils/types";
 import { useGetHeaderTitle } from "../../utils/hooks/getHeaderTitle";
 import DashboardHeaderMenu from "../DashboardHeaderMenu";
 
+import styles from "./styles";
+
 type TDashboardHeader = {
   onToggleSideNav: () => void;
 };
@@ -39,7 +41,7 @@ const DashboardHeader = ({ onToggleSideNav }: TDashboardHeader) => {
   };
 
   return (
-    <AppBar position="static" sx={{ bgcolor: "#F7F8FC" }}>
+    <AppBar position="static" sx={styles.appbar}>
       <Toolbar>
         <Hidden smUp>
           <IconButton
@@ -47,73 +49,33 @@ const DashboardHeader = ({ onToggleSideNav }: TDashboardHeader) => {
             aria-label="open drawer"
             onClick={onToggleSideNav}
             edge="start"
-            sx={{ color: "#252733", mt: { xs: "-40px" } }}
+            sx={styles.mobileMenuIcon}
           >
             <MenuIcon />
           </IconButton>
         </Hidden>
-        <Box
-          sx={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: { sm: "space-between", xs: "flex-start" },
-            width: "100%",
-            py: "20px",
-            flexDirection: { sm: "row", xs: "column-reverse" },
-          }}
-        >
+        <Box sx={styles.headerContainer}>
           <Box>
-            <Typography
-              sx={{ fontSize: "24px", fontWeight: "bold", color: "#252733" }}
-            >
-              {headerTitle}
-            </Typography>
+            <Typography sx={styles.headerTitle}>{headerTitle}</Typography>
           </Box>
 
-          <Box
-            sx={{
-              display: "flex",
-              alignItems: "center",
-              ml: { xs: "auto" },
-            }}
-          >
-            <Box sx={{ display: "flex", alignItems: "center" }}>
-              <SearchIcon
-                sx={{ color: "#C5C7CD", width: "22px", height: "22px" }}
-              />
+          <Box sx={styles.headerMiddleSectionWrapper}>
+            <Box sx={styles.iconsWrapper}>
+              <SearchIcon sx={styles.searchIcon} />
               <Badge
                 color="primary"
                 variant="dot"
                 overlap="circular"
-                sx={{
-                  "& .MuiBadge-badge": {
-                    backgroundColor: "primary",
-                    border: "1px solid #F7F8FC",
-                  },
-                }}
+                sx={styles.notificationBadge}
               >
-                <NotificationsIcon
-                  sx={{
-                    color: "#C5C7CD",
-                    width: "22px",
-                    height: "22px",
-                    ml: "25px",
-                  }}
-                />
+                <NotificationsIcon sx={styles.notificationIcon} />
               </Badge>
             </Box>
-            <Divider orientation="vertical" flexItem sx={{ ml: "32px" }} />
-            <Box
-              sx={{
-                color: "#252733",
-                fontSize: "14px",
-                ml: "32px",
-                fontWeight: "600",
-              }}
-            >
-              {user?.name}
+            <Divider orientation="vertical" flexItem sx={styles.divider} />
+            <Box sx={styles.userNameWrapper}>
+              {user?.name ? user.name : "Hello, user"}
             </Box>
-            <Box sx={{ ml: "14px" }}>
+            <Box sx={styles.menuWrapper}>
               <Tooltip title="Account settings">
                 <IconButton
                   onClick={handleClick}
@@ -124,11 +86,7 @@ const DashboardHeader = ({ onToggleSideNav }: TDashboardHeader) => {
                   <Avatar
                     alt={user?.name}
                     src={user?.photo}
-                    sx={{
-                      width: 40,
-                      height: 40,
-                      border: "2px solid #C5C7CD",
-                    }}
+                    sx={styles.avatar}
                   />
                 </IconButton>
               </Tooltip>

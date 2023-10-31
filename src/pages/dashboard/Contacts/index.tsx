@@ -6,6 +6,8 @@ import { contactColumns } from "./contactsColumns";
 import { contactsData } from "../../../data/contactsData";
 import { addContactFormData } from "../../../components/forms/formsData/addContact";
 
+import styles from "./styles";
+
 function Contacts() {
   const isMobile = useMediaQuery("(max-width:600px)");
   const isTablet = useMediaQuery("(max-width:900px)");
@@ -38,13 +40,9 @@ function Contacts() {
       disableGutters
       maxWidth={"xl"}
       sx={[
-        { my: "20px" },
-        isMobile && {
-          width: "375px",
-        },
-        isTablet && {
-          width: "375px",
-        },
+        styles.container,
+        isMobile && styles.mobileWidth,
+        isTablet && styles.tabletWidth,
       ]}
     >
       <CommonDataGrid

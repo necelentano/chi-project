@@ -3,6 +3,8 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 
+import styles from "./styles";
+
 type TSettingsOptionItemProps = {
   title: string;
   desc: string;
@@ -17,28 +19,10 @@ const SettingsOptionItem = ({
   route,
 }: TSettingsOptionItemProps) => {
   return (
-    <Box
-      sx={{
-        display: "flex",
-        width: "80%",
-        margin: "0 auto",
-        justifyContent: "space-between",
-        alignItems: "center",
-        border: "1px solid #C5C7CD",
-        borderRadius: "8px",
-        bgcolor: "#FFFFFF",
-        py: "10px",
-        px: "20px",
-        flexDirection: { sm: "row", xs: "column" },
-        mb: "20px",
-      }}
-    >
+    <Box sx={styles.container}>
       <Box>
         <Typography variant="h6">{title}</Typography>
-        <Typography
-          variant="subtitle1"
-          sx={{ color: "#C5C7CD", mb: { xs: "10px" } }}
-        >
+        <Typography variant="subtitle1" sx={styles.description}>
           {desc}
         </Typography>
       </Box>

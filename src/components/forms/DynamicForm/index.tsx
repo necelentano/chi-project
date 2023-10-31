@@ -22,6 +22,8 @@ import { TLoginFormData } from "../formsData/login";
 import { TAddTicketFormData } from "../formsData/addTicket";
 import { TForgotPasswordFormData } from "../formsData/forgotPassword";
 
+import styles from "./styles";
+
 export type TFormTemplate =
   | TLoginFormData
   | TAddContactFormData
@@ -83,18 +85,7 @@ const DynamicForm = ({
   return (
     <Paper
       variant={isModal ? "elevation" : "outlined"}
-      sx={[
-        {
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
-          alignItems: "center",
-          width: "380px",
-          p: "32px",
-          borderRadius: "8px",
-        },
-        isModal && { borderRadius: "0px" },
-      ]}
+      sx={[styles.paper, isModal && styles.paperIsModal]}
     >
       {header && <FormHeader />}
       <Box
@@ -104,24 +95,12 @@ const DynamicForm = ({
         noValidate
       >
         {title && (
-          <Box
-            sx={{
-              display: "flex",
-              flexDirection: "column",
-              textAlign: "center",
-            }}
-          >
+          <Box sx={styles.topTextWrapper}>
             <FormTitle title={title} />
           </Box>
         )}
         {description && (
-          <Box
-            sx={{
-              display: "flex",
-              flexDirection: "column",
-              textAlign: "center",
-            }}
-          >
+          <Box sx={styles.topTextWrapper}>
             <FormDescription description={description} />
           </Box>
         )}
@@ -140,13 +119,7 @@ const DynamicForm = ({
           </FormButton>
         )}
 
-        <Box
-          sx={{
-            position: "relative",
-            display: "flex",
-            justifyContent: "center",
-          }}
-        >
+        <Box sx={styles.errorTextWrapper}>
           {isError ? (
             <ErrorText>{`${(error as TAuthError).name}: ${
               (error as TAuthError).code
@@ -160,16 +133,7 @@ const DynamicForm = ({
           variant="text"
           onClick={handleCloseModal}
           fullWidth
-          sx={{
-            borderRadius: "8px",
-            py: "9px",
-            mb: "30px",
-            "&.MuiButton-text": {
-              textTransform: "inherit",
-              fontSize: "14px",
-              fontWeight: 600,
-            },
-          }}
+          sx={styles.modalCancelButton}
         >
           Cancel
         </Button>

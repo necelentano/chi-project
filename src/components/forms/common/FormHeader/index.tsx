@@ -3,22 +3,15 @@ import Avatar from "@mui/material/Avatar";
 import Typography from "@mui/material/Typography";
 
 import logo from "../../../../assets/logo.svg";
+import styles from "./styles";
 
 function FormHeader() {
   return (
     <>
-      <Box sx={{ mb: "10px" }}>
-        <Avatar alt="Logo" src={logo} sx={{ width: 48, height: 48 }} />
+      <Box sx={styles.logoWrapper}>
+        <Avatar alt="Logo" src={logo} sx={styles.logo} />
       </Box>
-      <Typography
-        sx={{
-          fontSize: "19px",
-          fontWeight: "fontWeightBold",
-          color: "#A4A6B3",
-        }}
-      >
-        Dashboard Kit
-      </Typography>
+      <Typography sx={styles.text}>Dashboard Kit</Typography>
     </>
   );
 }

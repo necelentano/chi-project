@@ -1,9 +1,18 @@
 import { Modal } from "@mui/material";
-import React, { useEffect } from "react";
+import { PropsWithChildren, useEffect } from "react";
 import { useAppDispatch } from "../../utils/hooks/redux";
 import { setModalOpen } from "../../store/modalSlice";
 
-const DashModal = ({ isOpen, handleClose, children }) => {
+type TDashModalProps = {
+  isOpen: boolean;
+  handleClose: () => void;
+};
+
+const DashModal = ({
+  isOpen,
+  handleClose,
+  children,
+}: PropsWithChildren<TDashModalProps>) => {
   const dispatch = useAppDispatch();
   useEffect(() => {
     return () => {
@@ -11,13 +20,8 @@ const DashModal = ({ isOpen, handleClose, children }) => {
     };
   }, [dispatch]);
   return (
-    <Modal
-      open={isOpen}
-      onClose={handleClose}
-      aria-labelledby="modal-modal-title"
-      aria-describedby="modal-modal-description"
-    >
-      {children}
+    <Modal open={isOpen} onClose={handleClose}>
+      <>{children}</>
     </Modal>
   );
 };

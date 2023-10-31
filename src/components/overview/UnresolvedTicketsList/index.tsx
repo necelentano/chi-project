@@ -4,6 +4,8 @@ import ticketsData from "../../../data/tickets";
 import { useEffect, useState } from "react";
 import UnresolvedTicketItemSkeleton from "./UnresolvedTicketItemSkeleton";
 
+import styles from "./styles";
+
 const UnresolvedTicketsList = () => {
   const [loading, setLoading] = useState(false);
 
@@ -16,13 +18,7 @@ const UnresolvedTicketsList = () => {
   }, []);
 
   const contentLoader = (
-    <Box
-      sx={{
-        "& .MuiBox-root:last-of-type": {
-          borderBottom: 0,
-        },
-      }}
-    >
+    <Box sx={styles.wrapper}>
       {[0, 1, 2, 3].map((item) => (
         <UnresolvedTicketItemSkeleton key={item} />
       ))}
@@ -34,13 +30,7 @@ const UnresolvedTicketsList = () => {
   }
 
   return (
-    <Box
-      sx={{
-        "& .MuiBox-root:last-of-type": {
-          borderBottom: 0,
-        },
-      }}
-    >
+    <Box sx={styles.wrapper}>
       {ticketsData.map((item) => (
         <UnresolvedTicketsListItem item={item} key={item.ticketTypeId} />
       ))}

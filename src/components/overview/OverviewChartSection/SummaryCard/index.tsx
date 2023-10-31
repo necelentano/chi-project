@@ -1,5 +1,7 @@
 import { Typography, Box } from "@mui/material";
 
+import styles from "./styles";
+
 type TOverviewCardProps = {
   title: string;
   data: string;
@@ -7,26 +9,9 @@ type TOverviewCardProps = {
 
 const SummaryCard = ({ title, data }: TOverviewCardProps) => {
   return (
-    <Box
-      sx={{
-        py: "32px",
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "center",
-        alignItems: "center",
-        borderBottom: "1px solid #DFE0EB",
-      }}
-    >
-      <Typography
-        sx={{ color: "#9FA2B4", fontSize: "16px", fontWeight: "600" }}
-      >
-        {title}
-      </Typography>
-      <Typography
-        sx={{ color: "#252733", fontSize: "24px", fontWeight: "700" }}
-      >
-        {data}
-      </Typography>
+    <Box sx={styles.сontainer}>
+      <Typography sx={styles.title}>{title}</Typography>
+      <Typography sx={styles.data}>{data}</Typography>
     </Box>
   );
 };

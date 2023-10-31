@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 
-const CustomActiveDots = (props: any) => {
+const CustomActiveDots = (props) => {
   const { cx, cy, value, setActiveDotPos } = props;
 
   useEffect(() => {

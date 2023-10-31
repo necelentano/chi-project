@@ -15,6 +15,8 @@ import CustomActiveDots from "../CustomActiveDots";
 import { useEffect, useState } from "react";
 import chartsData from "../../../../data/charts";
 
+import styles from "./styles";
+
 const OverviewAreaChart = () => {
   const [activeDotPos, setActiveDotPos] = useState({ x: 0, y: 0 });
   const [loading, setLoading] = useState(false);
@@ -30,13 +32,7 @@ const OverviewAreaChart = () => {
   return (
     <ResponsiveContainer width="100%" height={500}>
       {!loading ? (
-        <Box
-          sx={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
+        <Box sx={styles.circularProgressWrapper}>
           <CircularProgress />
         </Box>
       ) : (

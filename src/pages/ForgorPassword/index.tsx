@@ -14,6 +14,8 @@ import FormTitle from "../../components/forms/common/FormTitle";
 import FormDescription from "../../components/forms/common/FormDescription";
 import FormButton from "../../components/forms/common/FormButton";
 
+import styles from "./styles";
+
 const ForgotPassword = () => {
   const navigate = useNavigate();
   const user = useAppSelector((state) => state.auth.user);
@@ -47,27 +49,9 @@ const ForgotPassword = () => {
   }, [isError, error]);
 
   const contentAfterEmailSent = (
-    <Paper
-      variant="outlined"
-      sx={{
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "center",
-        alignItems: "center",
-        width: "380px",
-        p: "32px",
-        borderRadius: "8px",
-      }}
-    >
+    <Paper variant="outlined" sx={styles.paperContainer}>
       <FormHeader />
-      <Box
-        sx={{
-          mb: "20px",
-          display: "flex",
-          flexDirection: "column",
-          textAlign: "center",
-        }}
-      >
+      <Box sx={styles.wrapper}>
         <FormTitle title="Forgot Password?" />
         <FormDescription description={sentDescription} />
       </Box>

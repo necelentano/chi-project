@@ -6,6 +6,8 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { TTicketDatagridItem } from "../../../utils/types";
 
+import styles from "./styles";
+
 type TActionCellProps = {
   row: TTicketDatagridItem;
 };
@@ -34,26 +36,14 @@ const ActionsCell = ({ row }: TActionCellProps) => {
       >
         <MenuItem
           onClick={() => console.log(`Ticket #${row.id} was edited`)}
-          sx={{
-            "& .MuiSvgIcon-root": {
-              fontSize: 18,
-              marginRight: "8px",
-              color: "primary.main",
-            },
-          }}
+          sx={styles.editIcon}
         >
           <ModeEditIcon />
           Edit
         </MenuItem>
         <MenuItem
           onClick={() => console.log(`Ticket #${row.id} was deleted`)}
-          sx={{
-            "& .MuiSvgIcon-root": {
-              fontSize: 18,
-              marginRight: "8px",
-              color: "red",
-            },
-          }}
+          sx={styles.deleteIcon}
         >
           <DeleteIcon />
           Delete

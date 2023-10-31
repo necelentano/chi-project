@@ -7,6 +7,7 @@ import UnresolvedTickets from "../../../components/overview/UnresolvedTicketsLis
 import TasksSection from "../../../components/overview/TasksSection";
 import { useEffect, useState } from "react";
 import OverviewCardSkeleton from "../../../components/overview/OverviewCardSkeleton";
+import dayjs from "dayjs";
 
 const Overview = () => {
   const [loading, setLoading] = useState(false);
@@ -53,7 +54,7 @@ const Overview = () => {
 
         {/* row 2 - ChartSection & Summary */}
         <Grid item xs={12} sm={12} md={12} lg={12}>
-          <OverviewChartSection />
+          <OverviewChartSection currentDate={dayjs()} />
         </Grid>
 
         {/* row 3 - Unresolved tickets & Tasks */}

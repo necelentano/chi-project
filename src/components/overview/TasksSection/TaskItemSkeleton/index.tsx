@@ -1,27 +1,12 @@
 import { Box, Skeleton } from "@mui/material";
 
+import styles from "./styles";
+
 const TaskItemSkeleton = () => {
   return (
-    <Box
-      sx={{
-        display: "flex",
-        justifyContent: "space-between",
-        alignItems: "center",
-        pt: "12px",
-        pb: "13px",
-        borderBottom: "1px solid #DFE0EB",
-        minWidth: "100%",
-        px: "32px",
-      }}
-    >
-      <Box
-        sx={{
-          display: "flex",
-          alignItems: "center",
-          minWidth: "86%",
-        }}
-      >
-        <Box sx={{ mr: "16px" }}>
+    <Box sx={styles.container}>
+      <Box sx={styles.leftSideWrapper}>
+        <Box sx={styles.circularSkeletonWrapper}>
           <Skeleton
             animation="wave"
             variant="circular"
@@ -29,17 +14,17 @@ const TaskItemSkeleton = () => {
             height={24}
           />
         </Box>
-        <Box sx={{ width: "100%" }}>
+        <Box sx={styles.lineSkeletonWrapper}>
           <Skeleton animation="wave" height={10} width="70%" />
         </Box>
       </Box>
-      <Box sx={{ width: 72 }}>
+      <Box sx={styles.rightSideWrapper}>
         <Skeleton
           animation="wave"
           variant="rectangular"
           height={32}
           width={72}
-          sx={{ borderRadius: "8px" }}
+          sx={styles.rectangularSkeleton}
         />
       </Box>
     </Box>

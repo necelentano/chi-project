@@ -9,6 +9,8 @@ import {
   sortTicketsByPriority,
 } from "../../../utils/helpers";
 
+import styles from "./columnsStyles";
+
 dayjs.extend(relativeTime);
 
 export const ticketColumns: GridColDef[] = [
@@ -19,22 +21,11 @@ export const ticketColumns: GridColDef[] = [
     minWidth: 500,
     headerClassName: "datagrid-header-row",
     renderCell: (params) => (
-      <Box sx={{ display: "flex", alignItems: "center", ml: "32px" }}>
-        <Avatar src={params.row.byUser.photo} sx={{ mr: "32px" }} />
+      <Box sx={styles.ticketContainer}>
+        <Avatar src={params.row.byUser.photo} sx={styles.avatar} />
         <Box>
-          <Typography
-            sx={{
-              color: "#252733",
-              fontSize: "14px",
-              fontWeight: 600,
-              mb: "4px",
-            }}
-          >
-            {params.row.details}
-          </Typography>
-          <Typography
-            sx={{ color: "#C5C7CD", fontSize: "12px", fontWeight: 400 }}
-          >
+          <Typography sx={styles.primaryText}>{params.row.details}</Typography>
+          <Typography sx={styles.secondaryText}>
             Updated {dayjs().to(dayjs(params.row.updatedAt))}
           </Typography>
         </Box>
@@ -49,19 +40,10 @@ export const ticketColumns: GridColDef[] = [
     minWidth: 200,
     renderCell: (params) => (
       <Box>
-        <Typography
-          sx={{
-            color: "#252733",
-            fontSize: "14px",
-            fontWeight: 600,
-            mb: "4px",
-          }}
-        >
+        <Typography sx={styles.primaryText}>
           {params.row.byUser.name}
         </Typography>
-        <Typography
-          sx={{ color: "#C5C7CD", fontSize: "12px", fontWeight: 400 }}
-        >
+        <Typography sx={styles.secondaryText}>
           on {dayjs(params.row.byUser.createdAt).format("DD.MM.YYYY")}
         </Typography>
       </Box>
@@ -76,19 +58,10 @@ export const ticketColumns: GridColDef[] = [
     sortComparator: sortContactsByDate,
     renderCell: (params) => (
       <Box>
-        <Typography
-          sx={{
-            color: "#252733",
-            fontSize: "14px",
-            fontWeight: 600,
-            mb: "4px",
-          }}
-        >
+        <Typography sx={styles.primaryText}>
           {dayjs(params.row.createdAt).format("MMMM DD, YYYY")}
         </Typography>
-        <Typography
-          sx={{ color: "#C5C7CD", fontSize: "12px", fontWeight: 400 }}
-        >
+        <Typography sx={styles.secondaryText}>
           {dayjs(params.row.createdAt).format("h:mm A")}
         </Typography>
       </Box>
@@ -128,12 +101,7 @@ export const ticketColumns: GridColDef[] = [
             label={text}
             sx={{
               bgcolor,
-              textTransform: "uppercase",
-              fontSize: "11px",
-              fontWeight: 700,
-              color: "#FFFFFF",
-              px: "6px",
-              py: "4px",
+              ...styles.chip,
             }}
           />
         </Box>
