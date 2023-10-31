@@ -1,6 +1,9 @@
 import Button from "@mui/material/Button";
 import { PropsWithChildren } from "react";
 
+import styles from "./styles";
+import CircularProgress from "@mui/material/CircularProgress";
+
 type FormButtonProps = {
   btnType: "text" | "contained";
   loading?: boolean;
@@ -16,28 +19,9 @@ const FormButton = ({
       fullWidth
       variant={btnType === "text" ? "text" : "contained"}
       type="submit"
-      sx={[
-        {
-          "&.MuiButton-contained": {
-            borderRadius: "8px",
-            color: "#FFFFFF",
-            textTransform: "capitalize",
-            py: "10px",
-            mt: "30px",
-            mb: "20px",
-          },
-        },
-        {
-          "&.MuiButton-text": {
-            borderRadius: "8px",
-            color: "primary.text",
-            textTransform: "capitalize",
-            py: "10px",
-          },
-        },
-      ]}
+      sx={[styles.contained, styles.text]}
     >
-      {loading ? "Loading..." : children}
+      {loading ? <CircularProgress size={25} sx={styles.loader} /> : children}
     </Button>
   );
 };
