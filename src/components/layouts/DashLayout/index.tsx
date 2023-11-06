@@ -1,17 +1,18 @@
 import { PropsWithChildren, Suspense, useState } from "react";
 
 import Box from "@mui/material/Box";
-import Hidden from "@mui/material/Hidden";
 
 import DashboardSideNav from "../../DashboardSideNav";
 import DashboardHeader from "../../DashboardHeader";
 import Loader from "../../Loader";
 
 import styles from "./styles";
+import { useMediaQuery } from "@mui/material";
 
 const drawerWidth = 255;
 
 const DashLayout = ({ children }: PropsWithChildren) => {
+  const isTablet = useMediaQuery("(max-width:899px)");
   const [mobileOpen, setMobileOpen] = useState(false);
 
   const handleDrawerToggle = () => {
@@ -21,7 +22,7 @@ const DashLayout = ({ children }: PropsWithChildren) => {
   return (
     <Box sx={styles.container}>
       <Box component="nav" sx={styles.navigationWrapper(drawerWidth)}>
-        <Hidden smUp>
+        {isTablet ? (
           <DashboardSideNav
             PaperProps={styles.sideNavPaperProps(drawerWidth)}
             variant="temporary"
@@ -29,11 +30,12 @@ const DashLayout = ({ children }: PropsWithChildren) => {
             onClose={handleDrawerToggle}
             onCloseListItem={handleDrawerToggle}
           />
-        </Hidden>
-        <DashboardSideNav
-          PaperProps={styles.sideNavPaperProps(drawerWidth)}
-          sx={styles.dashboardSideNav}
-        />
+        ) : (
+          <DashboardSideNav
+            PaperProps={styles.sideNavPaperProps(drawerWidth)}
+            sx={styles.dashboardSideNav}
+          />
+        )}
       </Box>
 
       <Box sx={styles.pageContentWrapper}>

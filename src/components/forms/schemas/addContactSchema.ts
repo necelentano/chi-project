@@ -20,11 +20,13 @@ const addContactSchema = yup.object().shape({
   firstName: yup
     .string()
     .required("First name is required")
+    .matches(/^[aA-zZ\s]+$/, "Only alphabets are allowed for this field ")
     .min(2, "First name should have a minimum length of 2")
     .max(15, "First name should have a maximum length of 15"),
   lastName: yup
     .string()
     .required("Last name is required")
+    .matches(/^[aA-zZ\s]+$/, "Only alphabets are allowed for this field ")
     .min(2, "Last name should have a minimum length of 2")
     .max(15, "Last name should have a maximum length of 15"),
   email: yup

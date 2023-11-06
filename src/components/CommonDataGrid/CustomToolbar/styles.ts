@@ -49,6 +49,16 @@ const styles = {
       flexDirection: "column",
       top: "20px",
     },
+    "& .MuiButton-startIcon": {
+      color: "#c5c7cd",
+      "& .MuiSvgIcon-root": {
+        width: "20px",
+      },
+      "& .MuiBadge-badge": {
+        minWidth: "18px",
+        height: "18px",
+      },
+    },
   },
   formButton: {
     borderRadius: "8px",

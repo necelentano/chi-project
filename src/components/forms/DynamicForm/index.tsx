@@ -1,4 +1,4 @@
-import { Box, Button, Paper } from "@mui/material";
+import { Box, Button, Paper, useMediaQuery } from "@mui/material";
 import { FieldValues, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 
@@ -55,6 +55,8 @@ const DynamicForm = ({
   isLoading,
 }: TDynamicFormProps) => {
   const dispatch = useAppDispatch();
+  const isMobile320 = useMediaQuery("(max-width:360px)");
+  const isHeight670 = useMediaQuery("(max-height:670px)");
 
   const handleCloseModal = () => {
     dispatch(setModalOpen(false));
@@ -85,7 +87,12 @@ const DynamicForm = ({
   return (
     <Paper
       variant={isModal ? "elevation" : "outlined"}
-      sx={[styles.paper, isModal && styles.paperIsModal]}
+      sx={[
+        styles.paper,
+        isMobile320 && styles.paperIsMobile,
+        isModal && styles.paperIsModal,
+        isHeight670 && styles.isHeight670,
+      ]}
     >
       {header && <FormHeader />}
       <Box

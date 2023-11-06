@@ -13,8 +13,8 @@ export const contactColumns: GridColDef[] = [
   {
     field: "name",
     headerName: "Name",
-    flex: 3,
-    minWidth: 350,
+    flex: 2,
+    minWidth: 250,
     headerClassName: "datagrid-header-row",
     renderCell: (params) => (
       <Box sx={styles.nameContainer}>

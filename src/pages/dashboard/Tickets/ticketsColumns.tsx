@@ -17,8 +17,8 @@ export const ticketColumns: GridColDef[] = [
   {
     field: "ticketDetails",
     headerName: "Ticket details",
-    flex: 4,
-    minWidth: 500,
+    flex: 3,
+    minWidth: 400,
     headerClassName: "datagrid-header-row",
     renderCell: (params) => (
       <Box sx={styles.ticketContainer}>
@@ -72,7 +72,7 @@ export const ticketColumns: GridColDef[] = [
     field: "priority",
     headerName: "Priority",
     flex: 2,
-    minWidth: 200,
+    minWidth: 150,
     sortComparator: sortTicketsByPriority,
     renderCell: (params) => {
       const { priority } = params.row;

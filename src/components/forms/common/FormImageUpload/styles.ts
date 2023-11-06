@@ -12,6 +12,9 @@ const styles = {
     fontWeight: 600,
     ml: "24px",
   },
+  iconButton: {
+    p: "4px",
+  },
 };
 
 export default styles;
