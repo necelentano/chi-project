@@ -26,3 +26,12 @@ export const extractOptionFields = (columns: GridColDef[]) => {
     text: column.headerName,
   }));
 };
+export const shortImageName = (imgName: string, length: number) => {
+  const nameArr = imgName.split(".");
+  const extension = nameArr[nameArr.length - 1];
+  if (imgName.length > length) {
+    return imgName.substring(0, length).concat(`...    .${extension}`);
+  }
+
+  return imgName;
+};
