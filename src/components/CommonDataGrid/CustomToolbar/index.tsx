@@ -19,7 +19,6 @@ import { GridSortModel } from "@mui/x-data-grid";
 import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
 import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
 import AddIcon from "@mui/icons-material/Add";
-import FilterIcon from "../../../assets/filterIcon.svg?react";
 import SortIcon from "../../../assets/sortIcon.svg?react";
 import DashModal from "../../DashModal";
 
@@ -163,11 +162,6 @@ const CustomToolbar = ({
           <Box>
             <GridToolbarFilterButton
               ref={setFilterButtonEl}
-              componentsProps={{
-                button: {
-                  startIcon: <FilterIcon />,
-                },
-              }}
               sx={styles.filterButton}
             />
           </Box>

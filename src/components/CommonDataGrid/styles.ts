@@ -1,21 +1,27 @@
 const styles = {
   panel: {
-    "& .MuiDataGrid-panel": {
-      border: "1 px solid red",
-      bgcolor: "red",
-    },
     "& .MuiDataGrid-filterForm": {
       flexDirection: "column",
     },
-    "& .MuiButtonBase-root": {
-      display: "none",
+    "& .MuiIconButton-root": {
+      ml: "auto",
+      width: "30px",
     },
     "& .MuiPaper-root": {
-      maxWidth: "200px",
-      minWidth: "200px",
-      "& .MuiDataGrid-paper": {
-        maxWidth: "200px",
-        minWidth: "200px",
+      maxWidth: "206px",
+      minWidth: "206px",
+      // "& .MuiDataGrid-paper": {
+      //   // maxWidth: "206px",
+      //   // minWidth: "206px",
+      // },
+    },
+    "& .MuiDataGrid-filterFormValueInput": {
+      mt: "15px",
+      "& .MuiOutlinedInput-root": {
+        ml: "auto",
+        "& .MuiIconButton-root": {
+          width: "30px",
+        },
       },
     },
   },
@@ -54,6 +60,14 @@ const styles = {
     "& .MuiDataGrid-columnHeader--sorted": {
       ":hover": {
         "& .MuiDataGrid-iconButtonContainer": {
+          display: "flex",
+          cursor: "default",
+        },
+      },
+    },
+    "& .MuiDataGrid-columnHeader--filtered": {
+      ":hover": {
+        "& .MuiDataGrid-iconButtonContainer[aria-label='1 active filter']": {
           display: "flex",
           cursor: "default",
         },
