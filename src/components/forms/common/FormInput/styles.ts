@@ -9,7 +9,7 @@ const styles = {
       fontSize: "14px",
     },
     "& .MuiOutlinedInput-input": {
-      py: "14px",
+      py: "12px",
     },
     "& .MuiOutlinedInput-notchedOutline": {
       border: "2px solid",

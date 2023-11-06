@@ -5,7 +5,7 @@ const styles = {
     backgroundColor: "#FCFDFE",
     fontSize: "14px",
     "& .MuiInputBase-input": {
-      py: "14px",
+      py: "12px",
     },
     "& .MuiSelect-icon": {
       marginRight: "16px",

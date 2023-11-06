@@ -5,11 +5,17 @@ const styles = {
     justifyContent: "center",
     alignItems: "center",
     width: "380px",
-    p: "32px",
+    px: "32px",
+    py: "32px",
     borderRadius: "8px",
   },
   paperIsModal: {
     borderRadius: "0px",
+    py: "0px",
+  },
+  paperIsMobile: {
+    maxWidth: "320px",
+    px: "12px",
   },
   form: {
     width: "100%",
@@ -34,6 +40,11 @@ const styles = {
       fontSize: "14px",
       fontWeight: 600,
     },
+  },
+  isHeight670: {
+    height: "500px",
+    overflowY: "scroll",
+    paddingTop: "35%",
   },
 };
 

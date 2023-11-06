@@ -11,7 +11,7 @@ const styles = {
     backgroundColor: "#FCFDFE",
     fontSize: "14px",
     "& .MuiInputBase-input": {
-      py: "15px",
+      py: "12px",
       fontSize: "14px",
     },
     "& .MuiOutlinedInput-root": {

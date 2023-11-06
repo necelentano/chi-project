@@ -12,6 +12,7 @@ import { useState } from "react";
 import ErrorText from "../ErrorText";
 
 import styles from "./styles";
+import { shortImageName } from "../../../../utils/helpers";
 
 type TFormImageUpload = {
   control: UseFormReturn["control"];
@@ -36,7 +37,7 @@ const FormImageUpload = ({
   return (
     <>
       <Box sx={styles.wrapper}>
-        <IconButton component="label">
+        <IconButton component="label" sx={styles.iconButton}>
           <AddPhotoIcon />
           <Input
             type={type}
@@ -54,7 +55,7 @@ const FormImageUpload = ({
           <Typography sx={styles.text}>{placeholder}</Typography>
         ) : (
           <Typography sx={styles.text}>
-            {(watch("image") as FileList)[0].name}
+            {shortImageName((watch("image") as FileList)[0].name, 20)}
           </Typography>
         )}
       </Box>
