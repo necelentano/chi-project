@@ -1,18 +1,19 @@
 const styles = {
   container: {
     display: "flex",
+    overflow: "hidden",
     minHeight: "100vh",
     bgcolor: "#F7F8FC",
   },
   navigationWrapper: (drawerWidth: number) => ({
-    width: { sm: drawerWidth },
-    flexShrink: { sm: 0 },
+    width: { md: drawerWidth },
+    flexShrink: { md: 0 },
   }),
   sideNavPaperProps: (drawerWidth: number) => ({
     style: { width: drawerWidth },
   }),
   dashboardSideNav: {
-    display: { sm: "block", xs: "none" },
+    display: { lg: "block", md: "block", sm: "none", xs: "none" },
     flexShrink: 0,
     "& .MuiDrawer-paper": {
       width: 255,
