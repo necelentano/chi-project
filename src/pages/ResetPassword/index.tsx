@@ -24,7 +24,7 @@ const ResetPassword = () => {
       toast.info(
         `The password was reset. You are signed in with the new password`
       );
-      navigate("/dashboard/settings");
+      navigate("/settings");
     }
   }, [isSuccess, navigate]);
 
@@ -42,7 +42,7 @@ const ResetPassword = () => {
           variant="outlined"
           startIcon={<WestIcon />}
           component={RouterLink}
-          to="/dashboard/settings"
+          to="/settings"
         >
           Back to settings
         </Button>

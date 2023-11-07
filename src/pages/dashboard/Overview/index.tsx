@@ -63,7 +63,7 @@ const Overview = () => {
             title="Unresolved Tickets"
             detailsText="Group"
             btnText="View details"
-            btnRoute="/dashboard/tickets"
+            btnRoute="/tickets"
             groupType="Support"
           >
             <UnresolvedTickets />
@@ -74,7 +74,7 @@ const Overview = () => {
             title="Tasks"
             detailsText="Today"
             btnText="View all"
-            btnRoute="/dashboard/ideas"
+            btnRoute="/ideas"
           >
             <TasksSection />
           </BottomCardsWrapper>
