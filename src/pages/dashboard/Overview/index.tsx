@@ -7,6 +7,7 @@ import UnresolvedTickets from "../../../components/overview/UnresolvedTicketsLis
 import TasksSection from "../../../components/overview/TasksSection";
 import { useEffect, useState } from "react";
 import OverviewCardSkeleton from "../../../components/overview/OverviewCardSkeleton";
+import overviewCardsData from "../../../data/overviewCards";
 import dayjs from "dayjs";
 
 const Overview = () => {
@@ -23,35 +24,17 @@ const Overview = () => {
     <Container maxWidth="xl">
       <Grid container rowSpacing={5} columnSpacing={5} sx={{ mb: "30px" }}>
         {/* row 1 */}
-        <Grid item xs={12} sm={6} md={4} lg={3}>
-          {!loading ? (
-            <OverviewCardSkeleton />
-          ) : (
-            <OverviewCard title="Unresolved" data={60} />
-          )}
-        </Grid>
-        <Grid item xs={12} sm={6} md={4} lg={3}>
-          {!loading ? (
-            <OverviewCardSkeleton />
-          ) : (
-            <OverviewCard title="Overdue" data={16} />
-          )}
-        </Grid>
-        <Grid item xs={12} sm={6} md={4} lg={3}>
-          {!loading ? (
-            <OverviewCardSkeleton />
-          ) : (
-            <OverviewCard title="Open" data={43} />
-          )}
-        </Grid>
-        <Grid item xs={12} sm={6} md={4} lg={3}>
-          {!loading ? (
-            <OverviewCardSkeleton />
-          ) : (
-            <OverviewCard title="On hold" data={64} />
-          )}
-        </Grid>
-
+        {!loading
+          ? [0, 1, 2, 3].map((i) => (
+              <Grid item xs={12} sm={6} md={4} lg={3} key={i}>
+                <OverviewCardSkeleton />
+              </Grid>
+            ))
+          : overviewCardsData.map((card) => (
+              <Grid item xs={12} sm={6} md={4} lg={3} key={card.title}>
+                <OverviewCard title={card.title} data={card.data} />
+              </Grid>
+            ))}
         {/* row 2 - ChartSection & Summary */}
         <Grid item xs={12} sm={12} md={12} lg={12}>
           <OverviewChartSection currentDate={dayjs()} />
@@ -63,7 +46,7 @@ const Overview = () => {
             title="Unresolved Tickets"
             detailsText="Group"
             btnText="View details"
-            btnRoute="/dashboard/tickets"
+            btnRoute="/tickets"
             groupType="Support"
           >
             <UnresolvedTickets />
@@ -74,7 +57,7 @@ const Overview = () => {
             title="Tasks"
             detailsText="Today"
             btnText="View all"
-            btnRoute="/dashboard/ideas"
+            btnRoute="/ideas"
           >
             <TasksSection />
           </BottomCardsWrapper>

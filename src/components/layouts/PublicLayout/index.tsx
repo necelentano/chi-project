@@ -8,7 +8,7 @@ const PublicLayout = ({ children }: PropsWithChildren) => {
   const user = useAppSelector((state) => state.auth.user);
 
   return user ? (
-    <Navigate to={`/dashboard/overview`} state={{ from: location }} replace />
+    <Navigate to={`/overview`} state={{ from: location }} replace />
   ) : (
     <Box
       display="flex"

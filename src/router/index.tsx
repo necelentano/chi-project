@@ -41,7 +41,7 @@ const router = createBrowserRouter([
     ),
   },
   {
-    path: "/login",
+    path: "login",
     id: "Login",
     element: (
       <PublicLayout>
@@ -50,7 +50,7 @@ const router = createBrowserRouter([
     ),
   },
   {
-    path: "/signup",
+    path: "signup",
     id: "Signup",
     element: (
       <PublicLayout>
@@ -59,7 +59,7 @@ const router = createBrowserRouter([
     ),
   },
   {
-    path: "/forgot-password",
+    path: "forgot-password",
     id: "Forgot Password",
     element: (
       <PublicLayout>
@@ -68,7 +68,7 @@ const router = createBrowserRouter([
     ),
   },
   {
-    path: "/dashboard",
+    path: "/",
     id: "Dashboard",
     element: (
       <Protected>
@@ -80,47 +80,47 @@ const router = createBrowserRouter([
         errorElement: <ErrorPage />,
         children: [
           {
-            path: "/dashboard/overview",
+            path: "overview",
             id: "Dashboard Overview",
             element: <Overview />,
           },
           {
-            path: "/dashboard/tickets",
+            path: "tickets",
             id: "Dashboard Tickets",
             element: <Tickets />,
           },
           {
-            path: "/dashboard/ideas",
+            path: "ideas",
             id: "Dashboard Ideas",
             element: <Ideas />,
           },
           {
-            path: "/dashboard/contacts",
+            path: "contacts",
             id: "Dashboard Contacts",
             element: <Contacts />,
           },
           {
-            path: "/dashboard/agents",
+            path: "agents",
             id: "Dashboard Agents",
             element: <Agents />,
           },
           {
-            path: "/dashboard/articles",
+            path: "articles",
             id: "Dashboard Articles",
             element: <Articles />,
           },
           {
-            path: "/dashboard/settings",
+            path: "settings",
             id: "Dashboard Settings",
             element: <Settings />,
           },
           {
-            path: "/dashboard/subscription",
+            path: "subscription",
             id: "Dashboard Subscription",
             element: <Subscription />,
           },
           {
-            path: "/dashboard/settings/reset-password",
+            path: "settings/reset-password",
             id: "Settings Reset Password",
             element: <ResetPassword />,
           },

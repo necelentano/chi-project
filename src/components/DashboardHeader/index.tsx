@@ -14,7 +14,7 @@ import { useLocation } from "react-router-dom";
 
 import { useAppSelector } from "../../utils/hooks/redux";
 import { TStoreUser } from "../../utils/types";
-import { useGetHeaderTitle } from "../../utils/hooks/getHeaderTitle";
+import { getHeaderTitle } from "../../utils/helpers";
 import DashboardHeaderMenu from "../DashboardHeaderMenu";
 
 import styles from "./styles";
@@ -31,7 +31,7 @@ const DashboardHeader = ({ onToggleSideNav }: TDashboardHeader) => {
   const location = useLocation();
   const isTablet = useMediaQuery("(max-width:899px)");
 
-  const headerTitle = useGetHeaderTitle(location.pathname);
+  const headerTitle = getHeaderTitle(location.pathname);
 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);

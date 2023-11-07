@@ -41,7 +41,7 @@ const DashboardHeaderMenu = ({
       <MenuItem
         onClick={() => {
           handleClose();
-          navigate("/dashboard/settings/reset-password");
+          navigate("/settings/reset-password");
         }}
       >
         <ListItemIcon>
