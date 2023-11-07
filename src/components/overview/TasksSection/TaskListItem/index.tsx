@@ -19,6 +19,7 @@ const TaskListItem = ({ item }: TTaskListItemProps) => {
             sx={styles.checkbox}
             icon={<RadioButtonUncheckedIcon />}
             checkedIcon={<CheckCircleIcon />}
+            id={`${item.id}`}
           />
         </Box>
         <Box>

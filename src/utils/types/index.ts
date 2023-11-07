@@ -14,7 +14,7 @@ export type TTaskItem = {
   id: number;
   taskText: string;
   completed: boolean;
-  priority: "default" | "new" | "urgent";
+  priority: TaskLabelEnum;
 };
 
 export type TTicketItem = {
